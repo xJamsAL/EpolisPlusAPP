@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/shield"
+        android:icon="@drawable/main_toolbar_shiled_fragment"
+        android:title=""
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/main_toolbar_notif_fragment"
+        android:title=""
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/main_toolbar_setting_fragment"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+
+</menu>

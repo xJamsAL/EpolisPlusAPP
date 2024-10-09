@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="393dp"
+                android:layout_height="251dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="46dp"
+
+                android:src="@drawable/auth_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/codePassContainer"
+                android:layout_width="317dp"
+                android:layout_height="84dp"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edRepeatCodePass">
+
+                <!-- Individual Code Inputs -->
+                <EditText
+                    android:id="@+id/etCode1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/auth_input_border"
+                    android:clipToOutline="true"
+                    android:elevation="8dp"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:strokeColor="#EFEFEF"
+                    android:textSize="24sp" />
+
+                <!-- Repeat for other code inputs -->
+                <EditText
+                    android:id="@+id/etCode2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/auth_input_border"
+                    android:clipToOutline="true"
+                    android:elevation="8dp"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:strokeColor="#EFEFEF"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/etCode3"
+                    android:layout_width="47dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/auth_input_border"
+                    android:clipToOutline="true"
+                    android:elevation="8dp"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:strokeColor="#EFEFEF"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/etCode4"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/auth_input_border"
+                    android:clipToOutline="true"
+                    android:elevation="8dp"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:strokeColor="#EFEFEF"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/etCode5"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/auth_input_border"
+                    android:clipToOutline="true"
+                    android:elevation="8dp"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:strokeColor="#EFEFEF"
+
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edRepeatCodePass"
+                android:layout_width="363dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="60dp"
+                android:autofillHints=""
+                android:background="@drawable/auth_input_border"
+                android:drawableEnd="@drawable/auth_input_eye"
+                android:drawableTint="@color/grey"
+                android:elevation="8dp"
+                android:ems="10"
+                android:hint="@string/edit_input_repeat_pass"
+                android:inputType="text|textPassword"
+                android:paddingStart="10dp"
+
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/edCodePass"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/edCodePass"
+                app:layout_constraintTop_toBottomOf="@+id/edCodePass" />
+
+            <TextView
+                android:id="@+id/textView3421"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/text_input_repeat_pass"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/edRepeatCodePass"
+                app:layout_constraintStart_toStartOf="@+id/edRepeatCodePass" />
+
+            <TextView
+                android:id="@+id/textView821"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Минимум 8 символов"
+                android:textColor="@color/grey"
+                app:layout_constraintStart_toStartOf="@+id/edCodePass"
+                app:layout_constraintTop_toBottomOf="@+id/edCodePass" />
+
+            <EditText
+                android:id="@+id/edCodePass"
+                android:layout_width="363dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/auth_input_border"
+                android:drawableEnd="@drawable/auth_input_eye"
+                android:drawableTint="@color/grey"
+                android:elevation="8dp"
+                android:ems="10"
+                android:hint="@string/edtext_input_password"
+                android:inputType="text|textPassword"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/textView324"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/text_input_password"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@+id/edCodePass"
+                app:layout_constraintStart_toStartOf="@+id/edCodePass" />
+
+            <TextView
+                android:id="@+id/textView_ver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:letterSpacing="-0.01"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:text="@string/text_verification"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tollbarCodePass" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tollbarCodePass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/auth_toolbar_circle_left_24"
+                app:navigationIconTint="@color/green"
+                app:title="@string/regis_toolbar_back"
+                app:titleTextColor="@color/green" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="4sp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/text_verf_pass"
+                android:textSize="16sp"
+                android:translationY="-2.08sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_ver" />
+
+            <Button
+                android:id="@+id/btConfAndNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/green"
+                android:elevation="8dp"
+                android:text="@string/bt_verf_confirm_and_continue"
+                android:textColor="@color/white"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/edRepeatCodePass"
+                app:layout_constraintHorizontal_bias="0.55"
+                app:layout_constraintStart_toStartOf="@+id/edRepeatCodePass"
+                app:layout_constraintTop_toBottomOf="@+id/codePassContainer" />
+
+            <TextView
+                android:id="@+id/tvCodePass"
+                android:layout_width="271dp"
+                android:layout_height="49dp"
+                app:layout_constraintBottom_toBottomOf="@+id/codePassContainer"
+                app:layout_constraintEnd_toEndOf="@+id/codePassContainer"
+                app:layout_constraintStart_toStartOf="@+id/codePassContainer"
+                app:layout_constraintTop_toTopOf="@+id/codePassContainer" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/progressBarBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/progressBarBackColor"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="10dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </eightbitlab.com.blurview.BlurView>
+</FrameLayout>

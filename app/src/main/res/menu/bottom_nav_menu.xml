@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_item1"
+        android:icon="@drawable/main_bottom_home"
+        android:title="@string/text_bottom_home_page" />
+    <item
+        android:id="@+id/nav_item2"
+        android:icon="@drawable/main_toolbar_user_icon"
+        android:title="@string/text_bottom_cabinet_page" />
+    <item
+        android:id="@+id/nav_placeholder"
+        android:enabled="false"
+
+        android:title="" />
+    <item
+        android:id="@+id/nav_item4"
+        android:icon="@drawable/main_bottom_my_polis"
+        android:title="@string/text_bottom_polis_page" />
+    <item
+        android:id="@+id/nav_item5"
+        android:icon="@drawable/main_bottom_patners"
+        android:title="@string/text_bottom_patners_page" />
+</menu>

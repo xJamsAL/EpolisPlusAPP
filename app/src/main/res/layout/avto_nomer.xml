@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/not_color">
+
+    <LinearLayout
+        android:id="@+id/loadLayoutCom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edTechNomerCom"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvInfoTechCom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:text="@string/cabinet_dialog_sheet_tv_what_nomer"
+            android:textColor="@color/green"
+            app:drawableStartCompat="@drawable/cabinet_dialog_sheet_info" />
+
+        <Button
+            android:id="@+id/btLoadDataCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#D6F0E8"
+            android:elevation="5dp"
+            android:stateListAnimator="@null"
+            android:text="@string/cabinet_dialog_sheet_bt_load_data"
+            android:textColor="@color/green"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/cabinet_dialog_sheet_search"
+            app:iconGravity="textStart"
+            app:iconTint="@color/green" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/insideContainerCom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edTechNomerCom"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/cabinet_dialog_sheet_tv_avto_owner"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edOrgNameCom"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_background"
+            android:elevation="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/edit_text_color_selec"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/cabinet_dialog_sheet_tv_avto_marks"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edOrgNameCom" />
+
+        <LinearLayout
+            android:id="@+id/sbrosLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edAvtoMarkCom">
+
+            <Button
+                android:id="@+id/btSbros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/light_red"
+                android:text="@string/dop_dialog_bt_sbros"
+                android:textColor="@color/bottom_red"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/cabinet_dialog_sheet_x"
+                app:iconGravity="textStart"
+                app:iconTint="@color/bottom_red"
+                app:strokeColor="@color/stroke_light_red"
+                app:strokeWidth="1dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:button="@null"
+                android:drawableStart="@drawable/custom_checkbox"
+
+                android:drawablePadding="9dp"
+                android:text="@string/dop_dialog_checbox"
+                android:textColor="@color/black_text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edAvtoMarkCom"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_background"
+            android:elevation="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/edit_text_color_selec"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/cabinet_dialog_sheet_tv_avto_year_made"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/edOrgNameCom" />
+
+        <EditText
+            android:id="@+id/edAvtoYearCom"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_background"
+            android:elevation="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/edit_text_color_selec"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="196dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/edTechSeriyaCom"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="3dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="AAF"
+        android:inputType="text|textCapCharacters"
+        android:maxLength="3"
+        android:textColor="@color/edit_text_color_selec"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView313" />
+
+    <EditText
+        android:id="@+id/edTechNomerCom"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="3dp"
+        android:ems="10"
+        android:hint="000000000"
+        android:inputType="number"
+        android:maxLength="7"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/edit_text_color_selec"
+        app:layout_constraintBottom_toBottomOf="@+id/edTechSeriyaCom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edTechSeriyaCom"
+        app:layout_constraintTop_toTopOf="@+id/edTechSeriyaCom" />
+
+    <TextView
+        android:id="@+id/addAvtoRedDotted1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="5dp"
+        android:text="*"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/textView313"
+        app:layout_constraintStart_toEndOf="@+id/textView313"
+        app:layout_constraintTop_toTopOf="@+id/textView313" />
+
+    <TextView
+        android:id="@+id/textView313"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/cabinet_dialog_sheet_tv_passport"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avtoNomer" />
+
+    <TextView
+        android:id="@+id/addAvtoRedDotted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="5dp"
+        android:text="*"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/textView262"
+        app:layout_constraintStart_toEndOf="@+id/textView262"
+        app:layout_constraintTop_toTopOf="@+id/textView262" />
+
+    <TextView
+        android:id="@+id/textView262"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/cabinet_dialog_sheet_tv_gosnomer"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCarNomer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/avtoNomer"
+        app:layout_constraintEnd_toEndOf="@+id/avtoNomer"
+        app:layout_constraintStart_toStartOf="@+id/avtoNomer"
+        app:layout_constraintTop_toTopOf="@+id/avtoNomer" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/avtoNomer"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView262"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/insideLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edAvtoNomer"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:background="@color/white"
+                android:fontFamily="@font/fe_font"
+                android:hint="A 001 AA"
+
+                android:inputType="text|textCapCharacters|textNoSuggestions"
+                android:maxLength="8"
+                android:textColor="@color/black_text_color"
+                android:textColorHint="@color/avto_nomer"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edRegion"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/edRegion"
+                android:layout_width="48dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:background="@color/white"
+                android:fontFamily="@font/fe_font"
+                android:hint="01"
+                android:inputType="number"
+                android:lineSpacingExtra="21sp"
+                android:maxLength="2"
+                android:textColor="@color/black_text_color"
+                android:textColorHint="@color/avto_nomer"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="3dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/edAvtoNomer"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/edRegion"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edAvtoNomer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/cabinet_dialog_flag" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:maxLength="2"
+                android:text="UZ"
+                android:textColor="@color/avto_uz"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                app:layout_constraintStart_toStartOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

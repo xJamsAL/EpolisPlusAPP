@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back"
+    tools:context=".ui.settings.SettingsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarSetting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:clipToOutline="true"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/auth_toolbar_circle_left_24"
+        app:navigationIconTint="@color/white"
+        app:title="@string/regis_toolbar_back"
+        app:titleTextColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/setting_tv_title"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSetting" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView45">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btSetNotification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/not_color"
+                android:drawableEnd="@drawable/setting_rigt_arrow"
+                android:gravity="center|start"
+                android:paddingStart="50dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting_bt_notification"
+                android:textColor="@color/black_text_color"
+                android:textSize="16sp"
+                app:iconTint="@color/green"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btSetNotification" />
+
+            <Button
+                android:id="@+id/btSetQuestions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/not_color"
+                android:drawableEnd="@drawable/setting_rigt_arrow"
+                android:gravity="center|start"
+                android:paddingStart="50dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting_bt_questions"
+                android:textColor="@color/black_text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btSetLanguage" />
+
+            <Button
+                android:id="@+id/btSetAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/not_color"
+                android:drawableEnd="@drawable/setting_rigt_arrow"
+                android:gravity="center|start"
+                android:paddingStart="50dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting_bt_about"
+                android:textColor="@color/black_text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btSetSupport" />
+
+            <Button
+                android:id="@+id/btSetSupport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/not_color"
+                android:drawableEnd="@drawable/setting_rigt_arrow"
+                android:gravity="center|start"
+                android:paddingStart="50dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting_bt_support"
+                android:textColor="@color/black_text_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btSetQuestions" />
+
+            <Button
+                android:id="@+id/btSetLanguage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/not_color"
+                android:drawableEnd="@drawable/setting_rigt_arrow"
+                android:gravity="center|start"
+                android:paddingStart="50dp"
+                android:paddingEnd="24dp"
+                android:text="@string/setting_bt_change_lang"
+                android:textColor="@color/black_text_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+            <ImageView
+                android:id="@+id/ivSetNotify"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btSetNotification"
+                app:layout_constraintStart_toStartOf="@+id/btSetNotification"
+                app:layout_constraintTop_toTopOf="@+id/btSetNotification"
+                app:srcCompat="@drawable/main_toolbar_notif_fragment"
+                app:tint="@color/green" />
+
+            <ImageView
+                android:id="@+id/ivSetLang"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btSetLanguage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btSetLanguage"
+                app:srcCompat="@drawable/partners_world"
+                app:tint="@color/green" />
+
+            <ImageView
+                android:id="@+id/ivSetCall"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btSetSupport"
+                app:layout_constraintStart_toStartOf="@+id/btSetSupport"
+                app:layout_constraintTop_toTopOf="@+id/btSetSupport"
+                app:srcCompat="@drawable/main_call_red"
+                app:tint="@color/green" />
+
+            <ImageView
+                android:id="@+id/ivSetChat"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btSetQuestions"
+                app:layout_constraintStart_toStartOf="@+id/btSetQuestions"
+                app:layout_constraintTop_toTopOf="@+id/btSetQuestions"
+                app:srcCompat="@drawable/setting_chats" />
+
+            <ImageView
+                android:id="@+id/ivSetAbout"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btSetAbout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btSetAbout"
+                app:srcCompat="@drawable/cabinet_dialog_sheet_info" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivSetBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:translationZ="-2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/my_polis_back_deystv" />
+
+    <Button
+        android:id="@+id/btLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/white"
+        android:elevation="2dp"
+        android:stateListAnimator="@null"
+        android:text="@string/setting_bt_log_out"
+        android:textColor="@color/black_text_color"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/setting_logout"
+        app:iconGravity="textStart"
+        app:iconTint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/cardView" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/setting_tv_version"
+        android:textColor="@color/light_grey"
+        app:layout_constraintEnd_toEndOf="@+id/btLogout"
+        app:layout_constraintStart_toStartOf="@+id/btLogout"
+        app:layout_constraintTop_toBottomOf="@+id/btLogout" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.epolisplusapp.ui.settings.LanguageDialog"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

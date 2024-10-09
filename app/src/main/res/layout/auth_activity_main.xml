@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back"
+    tools:context=".ui.auth.AuthMain">
+
+    <LinearLayout
+        android:id="@+id/epolisplus_"
+        android:layout_width="177.87dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="152dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="31dp"
+            android:layout_height="31.88dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+
+
+            android:layout_weight="1"
+            android:gravity="right|fill_vertical"
+            android:text="@string/first_logo_name"
+            android:textColor="@color/green"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/second_logo_name"
+            android:textColor="@color/red"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="361dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="45dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="-1sp"
+        android:text="@string/welcome_auth"
+
+
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/epolisplus_"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/epolisplus_"
+        app:layout_constraintTop_toBottomOf="@+id/epolisplus_" />
+
+    <TextView
+        android:id="@+id/sub_title"
+        android:layout_width="361dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/welcome_cabinet"
+
+        android:textColor="#0A0A0A"
+        android:textSize="16sp"
+        android:translationY="-2.08sp"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/edInputPhoneNumber"
+        android:layout_width="363dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/auth_input_border"
+        android:elevation="8dp"
+        android:ems="10"
+
+        android:hint="@string/edtext_input_phone_number"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/sub_title"
+        app:layout_constraintStart_toStartOf="@+id/sub_title"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/text_input_phone_number"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toTopOf="@+id/edInputPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/edInputPhoneNumber" />
+
+    <Button
+        android:id="@+id/btInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/green"
+        android:pointerIcon="arrow"
+        android:text="@string/bt_login"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/auth_bt_input_left_arrow"
+        app:iconGravity="textEnd"
+        app:iconSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/edInputPhoneNumber"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edInputPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/edInputPhoneNumber" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="393dp"
+        android:layout_height="251dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="46dp"
+
+        android:src="@drawable/auth_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/progressBarBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/progressBarBackColor"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="10dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </eightbitlab.com.blurview.BlurView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

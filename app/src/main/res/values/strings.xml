@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">EpolisPlusApp</string>
+    <string name="first_logo_name">Epolis</string>
+    <string name="second_logo_name">Plus</string>
+    <string name="welcome_auth">Добро пожаловать</string>
+    <string name="welcome_cabinet">Войдите в личный кабинет</string>
+    <string name="text_input_phone_number">Номер телефона </string>
+    <string name="edtext_input_phone_number">+998 (00) 000–00–00</string>
+    <string name="text_input_password">Пароль</string>
+    <string name="edtext_input_password">Ваш пароль</string>
+    <string name="bt_login">Войти</string>
+    <string name="forgot_pass">Забыли пароль?</string>
+    <string name="regis_toolbar_back">Назад</string>
+    <string name="regis_title">Создать аккаунт </string>
+    <string name="text_input_name">Ваше имя</string>
+    <string name="edit_input_name">Напишите имя</string>
+    <string name="text_input_repeat_pass">Подтвердите пароль</string>
+    <string name="edit_input_repeat_pass">Напишите пароль еще раз</string>
+    <string name="chech_box_1_perssonal_data">Я согласен на обработку</string>
+    <string name="chech_box_2_perssonal_data">Персональных данных</string>
+    <string name="bt_reg">Зарегистрироваться</string>
+    <string name="text_input_8min_pass">Минимум 8 символов</string>
+    <string name="text_verification">Верификация</string>
+    <string name="text_verf_instructions">Введите код отправленный на ваш номер телефона</string>
+    <string name="text_verf_number">+998 (00) 000–00–00</string>
+    <string name="bt_verf_confirm_and_continue">Подтвердить и продолжить</string>
+    <string name="text_verf_time">00:58</string>
+    <string name="text_verf_repet_time">Отправить код повторно</string>
+    <string name="text_reset_title">Сброс пароля</string>
+    <string name="text_reset_subtitle">Введите свой номер телефона, мы отправим код подтверждения</string>
+    <string name="bt_reset_send_sms">Отправить SMS</string>
+    <string name="text_verf_pass">Введите код отправленный на Ваш номер телефона и введите новый пароль</string>
+    <string name="text_bottom_home_page">Главная</string>
+    <string name="text_bottom_cabinet_page">Кабинет</string>
+    <string name="text_bottom_sos_page">SOS</string>
+    <string name="text_bottom_polis_page">Мои полисы</string>
+    <string name="text_bottom_patners_page">Партнеры</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="main_fragment_text_title">Мои полисы</string>
+    <string name="main_fragment_bt_kasko">КАСКО</string>
+    <string name="main_fragment_bt_osago">ОСАГО</string>
+    <string name="main_fragment_bt_travel">Путешествие</string>
+    <string name="main_fragment_bt_others_serv">Дополнительные услуги</string>
+    <string name="main_fragment_bt_guarant">Гарантийный код</string>
+    <string name="main_fraigmemt_tv_insuriansce_programm">Программы страхования</string>
+    <string name="main_fraigment_tv_insur_prog_kasko">КАСКО</string>
+    <string name="main_fraigment_tv_insur_prog_osago">ОСАГО</string>
+    <string name="main_fraigment_tv_insur_prog_travel">Путешествия</string>
+    <string name="main_fraigment_bt_garant_code">Активировать гарантийный код</string>
+    <string name="main_fraigment_tv_dop_servic">Дополнительные услуги</string>
+    <string name="main_fraigment_tv_Emergency_serv">Экстренные\nуслуги</string>
+    <string name="main_frag_osago_card_tv">Вы еще не оформили страховой полис на ваше авто.</string>
+    <string name="main_frag_osago_card_bt">Оформить полис</string>
+    <string name="main_frag_travel_card_t">Вы еще не оформили страховой полис на путешествие.</string>
+    <string name="main_frag_garant_card_tv">Вы еще не активировали гарантийный код на ваше авто  </string>
+    <string name="main_frag_garant_card_bt">Активировать код</string>
+    <string name="main_frag_dop_service_bt">Оформить услуги</string>
+    <string name="main_activity_call_center">Позвонить операторам</string>
+    <string name="main_activity_telegram">Чат-бот\nТелеграм</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="cabinet_fragment_toolbar_title">Кабинет</string>
+    <string name="cabinet_fragment_tv_name">Ваше имя</string>
+    <string name="cabinet_fragment_tv_phone_number">Номер телефона</string>
+    <string name="cabinet_fragmrnt_tv_not_car">У вас нет сохраненных автомобилей.</string>
+    <string name="cabinet_fragment_bt_add_new_car">Добавить автомобиль</string>
+    <string name="cabinet_dialog_sheet">Отмена</string>
+    <string name="cabinet_dialog_sheet_tv_title">Добавить авто</string>
+    <string name="cabinet_dialog_sheet_tv_gosnomer">Гос номер</string>
+    <string name="cabinet_dialog_sheet_tv_passport">Серия и номер тех. паспорта</string>
+    <string name="cabinet_dialog_sheet_tv_what_nomer">Откуда взять номер техпаспорта?</string>
+    <string name="cabinet_dialog_sheet_bt_load_data">Загрузить данные</string>
+    <string name="cabinet_dialog_sheet_tv_avto_owner">Владелец автомобиля</string>
+    <string name="cabinet_dialog_sheet_tv_avto_marks">Марка автомобилия</string>
+    <string name="cabinet_dialog_sheet_tv_avto_year_made">Год выпуска</string>
+    <string name="cabinet_dialog_sheet_bt_add_avto">Добавить автомобиль</string>
+    <string name="cabinet_dialog_sheet_tv_personal_info">Личная информация</string>
+    <string name="cabinet_dialog_sheet_tv_name">Имя</string>
+    <string name="cabinet_dialog_sheet_bt_save_edit">Сохранить изменения</string>
+    <string name="cabinet_dialog_sheet_bt_delete">Удалить аккаунт</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="my_polis_fragment_tv_title">Мои полисы</string>
+    <string name="my_polis_fragment_bt_shield">Действующие</string>
+    <string name="my_polis_fragment_bt_oformlen">На оформлении</string>
+    <string name="my_polis_fragment_bt_arxiv">Архив</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="partners_fragment_toolbar_title">Партнеры</string>
+    <string name="partners_fragment_tv_services">Услуги</string>
+    <string name="partners_fragment_bt_call">Позвонить</string>
+    <string name="partners_fragment_bt_website">Веб-сайт</string>
+    <string name="partners_fragment_bt_info">Как стать партнером</string>
+    <!-- SPLASH SCREEN-->
+    <string name="splash_subtitle">Страховой агрегатор, которой \nработает на вас!</string>
+    <string name="splash_subtitle_2">работает на вас!</string>
+
+    <!-- Setting -->
+    <string name="setting_tv_title">Настройки</string>
+    <string name="setting_bt_notification">Уведомления</string>
+    <string name="setting_bt_change_lang">Выбор языка</string>
+    <string name="setting_bt_support">Служба поддержки</string>
+    <string name="setting_bt_questions">Ворос-ответы</string>
+    <string name="setting_bt_about">О приложении</string>
+    <string name="setting_bt_log_out">Выйти из аккаунта</string>
+    <string name="setting_tv_version">Версия приложения 1.0.22</string>
+    <string name="set_notify_tv_title">Уведомления</string>
+
+    <string name="set_lang_uzb">O’zbekcha</string>
+    <string name="set_lang_ru">Русский</string>
+    <string name="set_lang_eng">English</string>
+
+    <!-- SetNotify activity -->
+    <string name="set_notify_tv_push">Push-уведомления</string>
+    <string name="set_notify_tv_push_subtitle">Все уведомления будут приходить на ваш телефон в виде всплывающего окна</string>
+    <string name="set_notify_tv_sms">СМС-уведомления</string>
+    <string name="set_notify_tv_sms_subtitle">Все уведомления будут приходить на ваш телефон, даже если нет сети</string>
+    <string name="set_notify_tv_email">Электронная почта</string>
+    <string name="set_notify_tv_email_subtitle">Все уведомления будут приходить на вашу электронную почту</string>
+
+    <!-- Cabinet fragment -->
+    <string name="cabinet_fragm_tv_list_year">год</string>
+    <string name="cabinet_frag_tv_list_owner">Владелец авто</string>
+    <string name="cabinet_dialog_tv_delete_account">Вы хотите удалить \nаккаунт?</string>
+    <string name="cabinet_dialog_tv_delete_subtitle">Данное действие отменить будет\n невозможно!</string>
+    <string name="cabinet_dialog_bt_delete_account">Удалить</string>
+    <string name="cabinet_dialog_bt_delete_cancel">Отменить</string>
+    <!-- Cabinet Tech Dialog -->
+
+    <string name="cabinet_tech_dialog_title">Закрыть</string>
+    <string name="cabinet_tech_dialog_subtitle">Номер и серия\nтех. паспорта авто</string>
+    <string name="cabinet_tech_dialog_tv">Номер и серия тех. паспорта авто находится на тыльной стороне справа в углу, как показано ниже на картинке.</string>
+
+    <!-- Extra Activity -->
+    <string name="extra_tv_title">Экстренные услуги</string>
+    <string name="extra_bt_call">Экстренный вызов</string>
+
+    <!-- Dop Uslugi Activity -->
+    <string name="dop_uslugi_tv_title">Дополнительные услуги</string>
+    <string name="dop_uslugi_tv_present">Оформляя более 2 услуг</string>
+    <string name="dop_uslugi_tv_present2">Вы получаете скидку 20%</string>
+    <string name="dop_uslugi_tv_discount">Скидка</string>
+    <string name="dop_uslugi_tv_result">Итого:</string>
+    <string name="dop_uslugi_tv_price_result">Общая сумма подписки:</string>
+    <string name="dop_uslugi_bt_oformit">Оформить</string>
+    <string name="dop_uslugi_tv_price_item">Стоимость</string>
+    <string name="dop_uslugi_currency">сум</string>
+
+    <!-- Dop uslugi fragment -->
+    <string name="dop_dialog_tv_title">Услуга</string>
+    <string name="dop_dialog_tv_subtitle">Описание</string>
+    <string name="dop_dialog_tv_price">Стоимость</string>
+    
+    <!-- Dop uslugi oformlen -->
+    <string name="tv_common_data">Общая информация</string>
+    <string name="tv_personal_data">Данные\nклиента</string>
+    <string name="tv_about_contract">Информация о контракте</string>
+    <string name="tv_pay">Оплата</string>
+    <string name="change_car">Выбрать мой автомобиль</string>
+    <string name="dop_dialog_bt_add_car">Добавить другой автомобиль</string>
+    <string name="dop_diaolog_bt_next">Продолжить</string>
+    <string name="dop_dialog_tv_about_car">Информация об автомобиле</string>
+    <string name="dop_dialog_bt_sbros">Сбросить</string>
+    <string name="dop_dialog_checbox">Сохранить данные об этом автомобиле</string>
+    <string name="dop_dialog_tv_clients_data">Данные клиента</string>
+    <string name="dop_uslugi_tv_date_birth">Дата рождения</string>
+    <string name="dop_uslugi_tv_passeport_and_seriya">Серия и номер Паспортa/ID</string>
+    <string name="red_dott">*</string>
+    <string name="_000000000">000000000</string>
+    <string name="aaf">AAF</string>
+    <string name="dd.mm.yyyy">дд.мм.гггг</string>
+    <string name="dop_dialog_full_name">ФИО</string>
+    <string name="dop_dialog_pinfl">ПИНФЛ</string>
+    <string name="dop_dialog_tv_confirm_info">Подтверждение информации</string>
+    <string name="dop_uslugi_tv_price_layout_subtitle">Подписка оформляется на следующие услуги</string>
+    <string name="dop_uslugi_checkBox_part_1">Ознакомлен(а) и согласен(а) с</string>
+    <string name="dop_uslugi_checkBox_part_2">Условиями страхования</string>
+    <string name="dop_dialog_bt_pay">Оплатить</string>
+    <string name="dop_dialog_tv_summ_polis">Cумма оплаты</string>
+    <string name="dop_dialog_tv_price_polis">Цена полиса</string>
+    <string name="dop_dialog_tv_payment_method">Способ оплаты</string>
+
+</resources>
+
