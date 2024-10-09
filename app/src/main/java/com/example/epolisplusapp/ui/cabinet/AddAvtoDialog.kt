@@ -13,8 +13,8 @@ import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.CabinetDialogAddAvtoBinding
 import com.example.epolisplusapp.models.cabinet.AddCarRequest
 import com.example.epolisplusapp.models.cabinet.CheckCarRequest
-import com.example.epolisplusapp.models.cabinet.Response
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.models.cabinet.VehicleInformationResponse
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
@@ -32,7 +32,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
     private lateinit var progressBar: BlurView
     private var _binding: CabinetDialogAddAvtoBinding? = null
     private val binding get() = _binding!!
-    private var savedResponse: Response? = null
+    private var savedVehicleInformationResponse: VehicleInformationResponse? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -130,7 +130,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
 
                 if (response.response.ERROR == "0") {
                     val carData = response.response
-                    savedResponse = carData
+                    savedVehicleInformationResponse = carData
                     withContext(Dispatchers.Main) {
                         binding.edOrgName.setText(carData.ORGNAME)
                         binding.edAvtoMark.setText(carData.MODEL_NAME)
@@ -192,7 +192,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
                     return@launch
                 }
 
-                val response = savedResponse ?: run {
+                val response = savedVehicleInformationResponse ?: run {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Нет данных для отправки", Toast.LENGTH_SHORT).show()
                     }

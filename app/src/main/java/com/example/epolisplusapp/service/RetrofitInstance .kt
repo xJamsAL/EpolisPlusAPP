@@ -1,4 +1,4 @@
-package com.example.epolisplusapp.retrofit
+package com.example.epolisplusapp.service
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor

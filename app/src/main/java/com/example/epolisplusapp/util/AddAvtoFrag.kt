@@ -14,9 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.AvtoNomerBinding
-import com.example.epolisplusapp.models.cabinet.AddCarRequest
-import com.example.epolisplusapp.retrofit.RetrofitInstance
-import com.example.epolisplusapp.ui.dopservice.CarDataListener
+import com.example.epolisplusapp.service.RetrofitInstance
 
 class AddAvtoFrag : Fragment(){
 

@@ -73,7 +73,7 @@ class DopUslugiDialogFragment : BottomSheetDialogFragment() {
         CommonUtils.setupToolbarDialog(toolbar, this)
         val button  = view.findViewById<Button>(R.id.button2)
         button.setOnClickListener {
-            val bottomSheet = DopFormsFrag()
+            val bottomSheet = DopFormsFragment()
             bottomSheet.show(parentFragmentManager, "myBottomSheet1")
             dismiss()
 

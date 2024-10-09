@@ -16,7 +16,7 @@ import com.example.epolisplusapp.adapters.ExtraAdapter
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.ExtraServiceActivityBinding
 import com.example.epolisplusapp.models.extra.Risk
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

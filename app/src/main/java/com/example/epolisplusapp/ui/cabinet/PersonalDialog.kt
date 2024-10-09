@@ -14,7 +14,7 @@ import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.models.cabinet.UpdateProfileRequest
 import com.example.epolisplusapp.models.profile.SharedViewModel
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.ui.cabinet.CabinetFragment
 import com.example.epolisplusapp.ui.cabinet.DeleteDialog
 import com.example.epolisplusapp.util.CommonUtils

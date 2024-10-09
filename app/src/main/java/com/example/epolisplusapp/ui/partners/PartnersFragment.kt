@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.PartnersAdapter
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import eightbitlab.com.blurview.BlurView
 import kotlinx.coroutines.launch
 import retrofit2.HttpException

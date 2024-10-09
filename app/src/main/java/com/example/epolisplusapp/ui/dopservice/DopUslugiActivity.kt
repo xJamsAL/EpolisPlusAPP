@@ -9,14 +9,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.DopUslugiAdapter
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.DopUslugiActivityBinding
 import com.example.epolisplusapp.models.dopuslugi.DopItems
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -95,7 +94,7 @@ class DopUslugiActivity : AppCompatActivity() {
         binding.btOformit.setOnClickListener {
             if (items != null) {
                 Log.d("1234", "$items")
-                val bottomSheet = DopFormsFrag()
+                val bottomSheet = DopFormsFragment()
                 bottomSheet.show(supportFragmentManager, "myBottomSheet")
             } else{
                 Toast.makeText(this, "Выберите элемент перед продолжением", Toast.LENGTH_SHORT).show()

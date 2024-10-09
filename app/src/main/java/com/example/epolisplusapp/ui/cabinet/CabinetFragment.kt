@@ -24,7 +24,7 @@ import com.example.epolisplusapp.interfaces.OnCarDeleteClickListener
 import com.example.epolisplusapp.models.cabinet.DeleteCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
 import com.example.epolisplusapp.models.profile.SharedViewModel
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.applyPhoneNumberMask
 import com.google.android.material.appbar.MaterialToolbar

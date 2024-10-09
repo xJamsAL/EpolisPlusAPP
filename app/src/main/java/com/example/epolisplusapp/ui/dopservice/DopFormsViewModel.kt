@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.models.cabinet.AddCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
+import com.example.epolisplusapp.service.PreferenceService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,7 +29,8 @@ class DopFormsViewModel(
         Log.d("1234", "sendCarData2 called with: $addCarRequest")
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val accessToken = sharedPreferences.getString("access_token", null)
+                //     val accessToken = sharedPreferences.getString("access_token", null)
+                PreferenceService.getInstance(this).getAccesToken()
                 if (accessToken == null) {
                     Log.e("1234", "Access token is null")
                     errorLiveData.postValue("Токен недействителен")

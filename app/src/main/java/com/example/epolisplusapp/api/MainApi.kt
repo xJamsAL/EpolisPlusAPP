@@ -1,5 +1,6 @@
 package com.example.epolisplusapp.api
 
+import com.example.epolisplusapp.models.BaseResponse
 import com.example.epolisplusapp.models.auth.LoginRequest
 import com.example.epolisplusapp.models.auth.LoginResponse
 import com.example.epolisplusapp.models.auth.CheckPhoneRequest
@@ -19,11 +20,11 @@ import com.example.epolisplusapp.models.cabinet.AddCarResponse
 import com.example.epolisplusapp.models.cabinet.DeleteCarRequest
 import com.example.epolisplusapp.models.cabinet.DeleteCarResponse
 import com.example.epolisplusapp.models.cabinet.CheckCarRequest
-import com.example.epolisplusapp.models.cabinet.CheckCarResponse
 import com.example.epolisplusapp.models.cabinet.DeleteProfileResponse
 import com.example.epolisplusapp.models.cabinet.DeleteProfileRequest
 import com.example.epolisplusapp.models.cabinet.UpdateProfileRequest
 import com.example.epolisplusapp.models.cabinet.UpdateProfileResponse
+import com.example.epolisplusapp.models.cabinet.VehicleInformationResponse
 import com.example.epolisplusapp.models.dopuslugi.DopUslugiResponse
 import com.example.epolisplusapp.models.extra.ExtraResponse
 import com.example.epolisplusapp.models.partners.PartnersResponse
@@ -55,27 +56,43 @@ interface MainApi {
 
                 @POST("v1/user/reset-password")
         suspend fun resetPassword(@Body request: ResetPasswordRequest): ResetPasswordResponse
-// ----------------------------------------------------------------------------------\\
+
+        // ----------------------------------------------------------------------------------\\
         @GET("/v1/references/get-partners")
         suspend fun getPartners(): PartnersResponse
 
         @GET("/v1/user/profile")
-        suspend fun getUserProfile(@Header("Authorization")token: String):UserProfileResponse
+        suspend fun getUserProfile(@Header("Authorization") token: String): UserProfileResponse
 
         @POST("/v1/user/delete-my-car")
-        suspend fun deleteCar(@Header("Authorization")token: String, @Body request: DeleteCarRequest): DeleteCarResponse
+        suspend fun deleteCar(
+            @Header("Authorization") token: String,
+            @Body request: DeleteCarRequest
+        ): DeleteCarResponse
 
-        @POST("/v1/osgo/vehicle")
-        suspend fun checkCar(@Header("Authorization")token: String, @Body request: CheckCarRequest): CheckCarResponse
+        @POST(ApiConstanta.GET_VEHICLE_INFORMATION)
+        suspend fun checkCar(
+            @Header("Authorization") token: String,
+            @Body request: CheckCarRequest
+        ): BaseResponse<VehicleInformationResponse>
 
         @POST("/v1/user/add-user-car")
-        suspend fun addCar(@Header("Authorization")token: String, @Body request: AddCarRequest): AddCarResponse
+        suspend fun addCar(
+            @Header("Authorization") token: String,
+            @Body request: AddCarRequest
+        ): AddCarResponse
 
         @POST("/v2/user/update-profile")
-        suspend fun updateProfile(@Header("Authorization")token: String, @Body request: UpdateProfileRequest): UpdateProfileResponse
+        suspend fun updateProfile(
+            @Header("Authorization") token: String,
+            @Body request: UpdateProfileRequest
+        ): UpdateProfileResponse
 
         @POST("/v1/user/delete-phone-test")
-        suspend fun deleteProfile(@Header("Authorization")token: String, @Body request: DeleteProfileRequest): DeleteProfileResponse
+        suspend fun deleteProfile(
+            @Header("Authorization") token: String,
+            @Body request: DeleteProfileRequest
+        ): DeleteProfileResponse
 
         @GET("v1/litro/emergency-services")
         suspend fun getEmergency(@Header("Authorization")token: String):ExtraResponse

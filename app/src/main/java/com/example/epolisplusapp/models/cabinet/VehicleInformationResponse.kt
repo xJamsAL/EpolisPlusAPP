@@ -1,6 +1,6 @@
 package com.example.epolisplusapp.models.cabinet
 
-data class Response(
+data class VehicleInformationResponse(
     val ADDRESS: String,
     val BIRTHDAY: String,
     val BODY_NUMBER: String,

@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.models.cabinet.AddCarRequest
 import com.example.epolisplusapp.models.cabinet.CheckCarRequest
-import com.example.epolisplusapp.models.cabinet.CheckCarResponse
 import com.example.epolisplusapp.ui.dopservice.CarDataListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

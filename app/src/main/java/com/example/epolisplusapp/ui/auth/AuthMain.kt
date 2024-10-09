@@ -1,6 +1,6 @@
 package com.example.epolisplusapp.ui.auth
 
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,6 @@ import com.example.epolisplusapp.models.auth.CheckPhoneRequest
 import com.example.epolisplusapp.models.auth.CheckPhoneResponse
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
-import eightbitlab.com.blurview.BlurView
 import kotlinx.coroutines.launch
 
 class AuthMain : AppCompatActivity() {
