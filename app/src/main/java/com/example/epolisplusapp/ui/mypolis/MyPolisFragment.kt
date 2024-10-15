@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.PartnersAdapter
-import com.example.epolisplusapp.models.partners.Response
+import com.example.epolisplusapp.models.partners.GetPartnersResponse
 import com.google.android.material.button.MaterialButton
 
 class MyPolisFragment : Fragment() {
@@ -42,12 +42,12 @@ class MyPolisFragment : Fragment() {
 
 
         val testList = listOf(
-         Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
-            Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
-            Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
-            Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
-            Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
-            Response(1, "asdsa" , "sadsadadsad", "sadsadsadsa")
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa"),
+            GetPartnersResponse(1, "asdsa" , "sadsadadsad", "sadsadsadsa")
 
             )
 

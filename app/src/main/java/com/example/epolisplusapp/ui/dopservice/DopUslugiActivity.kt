@@ -9,14 +9,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.epolisplusapp.R
-import com.example.epolisplusapp.adapters.DopUslugiAdapter
+import com.example.epolisplusapp.adapters.LitroCalculatorAdapter
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.DopUslugiActivityBinding
-import com.example.epolisplusapp.models.dopuslugi.DopItems
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.models.dopuslugi.LitroCalculatorItems
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +26,7 @@ import java.util.Locale
 
 class DopUslugiActivity : AppCompatActivity() {
 
-    private lateinit var dopuslugiAdapter: DopUslugiAdapter
+    private lateinit var dopuslugiAdapter: LitroCalculatorAdapter
     private lateinit var apiService: MainApi.ApiService
     private lateinit var binding: DopUslugiActivityBinding
     private lateinit var sharedPreferences: SharedPreferences
@@ -49,7 +48,7 @@ class DopUslugiActivity : AppCompatActivity() {
         CommonUtils.setupBlurView(this, binding.dopBar, rootView)
 
 
-        dopuslugiAdapter = DopUslugiAdapter(
+        dopuslugiAdapter = LitroCalculatorAdapter(
             emptyList(), R.string.dop_uslugi_currency, this, discountPercent, discountLength,
             { itemCount, totalSum ->
                 items = itemCount
@@ -112,9 +111,9 @@ class DopUslugiActivity : AppCompatActivity() {
                 }
                 val accessToken = sharedPreferences.getString("access_token", null)
                 if (accessToken != null) {
-                    val response = apiService.getDopUslugi("Bearer $accessToken")
+                    val response = apiService.litroCalculator("Bearer $accessToken")
                     withContext(Dispatchers.Main) {
-                        val dopList: List<DopItems> = response.response.risk
+                        val dopList: List<LitroCalculatorItems> = response.response.risk
                         discountPercent = response.response.discount_percent
                         discountLength = response.response.discount_length
                         dopuslugiAdapter.updateData(dopList, discountPercent, discountLength)

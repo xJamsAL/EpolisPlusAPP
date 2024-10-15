@@ -10,11 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.epolisplusapp.R
-import com.example.epolisplusapp.models.extra.Risk
+import com.example.epolisplusapp.models.emergency.EmergencyServiceRisk
 import com.example.epolisplusapp.util.CommonUtils
 import java.util.Locale
 
-class ExtraAdapter(private var riskItem: List<Risk>,
+class ExtraAdapter(private var riskItem: List<EmergencyServiceRisk>,
                    private val currencyResId: Int,
                    private val context: Context) :
     RecyclerView.Adapter<ExtraAdapter.ExtraViewHolder>() {
@@ -22,7 +22,7 @@ class ExtraAdapter(private var riskItem: List<Risk>,
         val icon: ImageView = itemView.findViewById(R.id.ivExtraIcon)
         val name: TextView = itemView.findViewById(R.id.tvExtraTitle)
         val price: TextView = itemView.findViewById(R.id.tvExtraSubtitle)
-        fun bind(extra: Risk) {
+        fun bind(extra: EmergencyServiceRisk) {
             val formated =CommonUtils.formatSumWithSeparatorAndCurrency(
                 extra.price, Locale.getDefault(), context, currencyResId
             )
@@ -58,7 +58,7 @@ class ExtraAdapter(private var riskItem: List<Risk>,
 
     }
 
-    fun updateData(newExtraList: List<Risk>) {
+    fun updateData(newExtraList: List<EmergencyServiceRisk>) {
         riskItem = newExtraList
         notifyDataSetChanged()
     }

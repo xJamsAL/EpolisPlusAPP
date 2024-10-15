@@ -20,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.CabinetAdapter
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.interfaces.OnCarDeleteClickListener
-import com.example.epolisplusapp.models.cabinet.DeleteCarRequest
+import com.example.epolisplusapp.interfaces.IOnCarDeleteClickListener
+import com.example.epolisplusapp.models.cabinet.request.DeleteCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
 import com.example.epolisplusapp.models.profile.SharedViewModel
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.applyPhoneNumberMask
 import com.google.android.material.appbar.MaterialToolbar
@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class CabinetFragment : Fragment(), OnCarDeleteClickListener {
+class CabinetFragment : Fragment(), IOnCarDeleteClickListener {
     private lateinit var apiService: MainApi.ApiService
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var cabinetAdapter: CabinetAdapter

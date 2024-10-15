@@ -15,8 +15,8 @@ import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.ExtraAdapter
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.ExtraServiceActivityBinding
-import com.example.epolisplusapp.models.extra.Risk
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.models.emergency.EmergencyServiceRisk
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +30,7 @@ class ExtraActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var apiService: MainApi.ApiService
     private lateinit var binding: ExtraServiceActivityBinding
-    private var riskItem: List<Risk> = emptyList()
+    private var riskItem: List<EmergencyServiceRisk> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class ExtraActivity : AppCompatActivity() {
                 if (accessToken != null) {
                     val response = apiService.getEmergency("Bearer $accessToken")
                     withContext(Dispatchers.Main) {
-                        val riskList: List<Risk> = response.response.risk
+                        val riskList: List<EmergencyServiceRisk> = response.response.risk
                         val phone = response.response.phone
                         savePhoneToPreferences(phone)
                         val updatedCallCenter =

@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.DopFormsAdapter
 import com.example.epolisplusapp.databinding.DopUslugiOformlenBinding
-import com.example.epolisplusapp.models.cabinet.AddCarRequest
+import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
-import com.example.epolisplusapp.retrofit.RetrofitInstance
-import com.example.epolisplusapp.util.AddAvtoFrag
-import com.example.epolisplusapp.util.AddClientFrag
+import com.example.epolisplusapp.service.RetrofitInstance
+import com.example.epolisplusapp.module.module_add_avto.AddAvtoFrag
+import com.example.epolisplusapp.module.AddClientFrag
 import com.example.epolisplusapp.util.CommonUtils
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

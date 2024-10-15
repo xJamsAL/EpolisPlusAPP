@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.PartnersAdapter
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import eightbitlab.com.blurview.BlurView
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -56,7 +56,8 @@ class PartnersFragment : Fragment() {
 
                 progressBarBackPart.visibility = View.VISIBLE
                 val response = apiService.getPartners()
-                partnersAdapter.updateData(response.response)
+                val partnersList = response.response
+                partnersAdapter.updateData(partnersList)
                 progressBarBackPart.visibility = View.GONE
             } catch (e: HttpException) {
 

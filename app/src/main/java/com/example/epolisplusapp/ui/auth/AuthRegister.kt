@@ -1,6 +1,6 @@
 package com.example.epolisplusapp.ui.auth
 
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.databinding.AuthActivityRegistrationBinding
-import com.example.epolisplusapp.models.auth.RegisterRequest
+import com.example.epolisplusapp.models.auth.request.RegisterRequest
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
 

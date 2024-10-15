@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.models.cabinet.AddCarRequest
+import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,6 +1,6 @@
 package com.example.epolisplusapp.ui.auth
 
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.databinding.AuthActivityVerificationBinding
-import com.example.epolisplusapp.models.auth.ResendSmsRequest
-import com.example.epolisplusapp.models.auth.VerifyCodeRequest
+import com.example.epolisplusapp.models.auth.request.ResendSmsRequest
+import com.example.epolisplusapp.models.auth.request.VerifyCodeRequest
 import com.example.epolisplusapp.ui.main.MainActivity
 import com.example.epolisplusapp.util.CommonUtils
 import kotlinx.coroutines.launch

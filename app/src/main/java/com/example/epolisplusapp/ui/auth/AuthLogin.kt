@@ -1,18 +1,16 @@
 package com.example.epolisplusapp.ui.auth
 
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.databinding.AuthActivityLoginBinding
-import com.example.epolisplusapp.models.auth.LoginRequest
-import com.example.epolisplusapp.models.auth.LoginResponse
+import com.example.epolisplusapp.models.auth.request.LoginRequest
 import com.example.epolisplusapp.ui.main.MainActivity
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
@@ -82,7 +80,7 @@ class AuthLogin : AppCompatActivity() {
                 CommonUtils.hideKeyboard(this@AuthLogin)
                 binding.progressBarBack.visibility = View.VISIBLE
                 val formattedPhoneNumber = CommonUtils.formatPhoneNumber(phoneNumber)
-                val response: LoginResponse =
+                val response  =
                     retrofitInstance.api.login(LoginRequest(formattedPhoneNumber, password))
 
                 binding.progressBarBack.visibility = View.GONE

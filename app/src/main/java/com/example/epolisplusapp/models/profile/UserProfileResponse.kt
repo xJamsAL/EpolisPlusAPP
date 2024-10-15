@@ -1,12 +1,5 @@
 package com.example.epolisplusapp.models.profile
 
-data class UserProfileResponse(
-    val status: Int,
-    val code: Boolean,
-    val message: String,
-    val response: UserProfileData
-)
-
 data class UserProfileData(
     val phone: String,
     val full_name: String,

@@ -15,9 +15,9 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.models.cabinet.DeleteProfileRequest
+import com.example.epolisplusapp.models.cabinet.request.DeleteProfileRequest
 import com.example.epolisplusapp.models.profile.SharedViewModel
-import com.example.epolisplusapp.retrofit.RetrofitInstance
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.ui.auth.AuthMain
 import eightbitlab.com.blurview.BlurView
 import kotlinx.coroutines.CoroutineScope
