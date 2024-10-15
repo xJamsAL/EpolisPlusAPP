@@ -2,7 +2,7 @@ package com.example.epolisplusapp.service
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.epolisplusapp.interfaces.IConstanta
+import com.example.epolisplusapp.util.Constance
 
 class PreferenceService private constructor(context: Context) {
 
@@ -21,11 +21,11 @@ class PreferenceService private constructor(context: Context) {
     }
 
     fun getAccessToken(): String {
-        return preferences.getString(IConstanta.USER_ACCESS_TOKEN, "") ?: ""
+        return preferences.getString(Constance.USER_ACCESS_TOKEN, "") ?: ""
     }
 
     fun setAccessToken(token: String) {
-        preferences.edit().putString(IConstanta.USER_ACCESS_TOKEN, token).apply()
+        preferences.edit().putString(Constance.USER_ACCESS_TOKEN, token).apply()
     }
 
 }

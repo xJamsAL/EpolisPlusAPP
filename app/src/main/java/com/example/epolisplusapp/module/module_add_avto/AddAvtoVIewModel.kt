@@ -4,10 +4,16 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.cabinet.request.CheckCarRequest
 import com.example.epolisplusapp.models.cabinet.response.CheckCarResponse
+import com.example.epolisplusapp.models.error_models.ApiErrorMessage
+import com.example.epolisplusapp.models.error_models.Failure
+import com.example.epolisplusapp.models.error_models.GenericFailure
+import com.example.epolisplusapp.models.error_models.NetworkFailure
+import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.ui.dopservice.CarDataListener
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +29,10 @@ class AddAvtoViewModel(
     val checkCarRequestLiveData = MutableLiveData<CheckCarRequest>()
     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
     val successMessageLiveData = MutableLiveData<String>()
-    val errorMessageLiveData = MutableLiveData<String>()
+    val errorMessageLiveData = MutableLiveData<Failure>()
     val carDataLiveData = MutableLiveData<CheckCarResponse?>()
-    val isContainerVisible = MutableLiveData<Boolean>(false)
-    val isSecondContainerVisible = MutableLiveData<Boolean>(false)
+    val isContainerVisible = MutableLiveData<Boolean>()
+    val isSecondContainerVisible = MutableLiveData<Boolean>()
 
     fun sendCarData(techSeriya: String, techNomer: String, avtoRegion: String, avtoNomer: String) {
         Log.d("1234", "sendCarData вызван с параметрами: techSeriya=$techSeriya, techNomer=$techNomer, avtoRegion=$avtoRegion, avtoNomer=$avtoNomer")
@@ -34,7 +40,7 @@ class AddAvtoViewModel(
             try {
                 val accessToken = preferenceService.getAccessToken()
                 if (accessToken.isEmpty()) {
-                    errorMessageLiveData.postValue("Токен недействителен")
+                    errorMessageLiveData.postValue(TokenFailure())
                     return@launch
                 }
 
@@ -78,12 +84,12 @@ class AddAvtoViewModel(
                     listener?.onCarDataReceived(addCarRequest)
 
                 } else {
-                    errorMessageLiveData.postValue("Ошибка: ${response.message}")
+                    errorMessageLiveData.postValue(ApiErrorMessage(response.message))
                 }
             } catch (e: HttpException) {
-                errorMessageLiveData.postValue("Ошибка сети: ${e.message}")
+                errorMessageLiveData.postValue(NetworkFailure(e.message()))
             } catch (e: Exception) {
-                errorMessageLiveData.postValue("Произошла ошибка: ${e.message}")
+                errorMessageLiveData.postValue(GenericFailure())
             }
         }
     }

@@ -16,8 +16,9 @@ import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
+import com.google.gson.ToNumberStrategy
 
-class AddAvtoFrag : Fragment(){
+class AddAvtoFrag : Fragment() {
 
     private lateinit var addAvtoViewModel: AddAvtoViewModel
     private lateinit var apiService: MainApi.ApiService
@@ -53,31 +54,37 @@ class AddAvtoFrag : Fragment(){
         val carNomer: EditText = view.findViewById(R.id.edAvtoNomer)
         carNomer.addTextChangedListener(EditSpaces(carNomer))
         binding.edTechNomerCom.addTextChangedListener(EditHideKeyboard(binding.edTechNomerCom))
-
         preferenceService = PreferenceService.getInstance(requireContext())
         apiService = RetrofitInstance(requireContext()).api
-
         addAvtoViewModel = AddAvtoViewModel(apiService, preferenceService)
-
-
 
         setupObservers()
 
-        binding.btLoadDataCom.setOnClickListener {
-            val techSeriya = binding.edTechSeriyaCom.text.toString().trim()
-            val techNomer = binding.edTechNomerCom.text.toString().trim()
-            val avtoRegion = binding.edRegion.text.toString().trim()
-            val avtoNomer = binding.edAvtoNomer.text.toString().trim()
-
-            if (validateInput(techSeriya, techNomer, avtoRegion, avtoNomer)) {
-                Log.d("1234", "Sending car data: $techSeriya, $techNomer, $avtoRegion, $avtoNomer")
-                addAvtoViewModel.sendCarData(techSeriya, techNomer, avtoRegion, avtoNomer)
-                binding.loadLayoutCom.visibility = View.VISIBLE
+        addAvtoViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { failure ->
+            failure?.let {
+                val message = it.getErrorMessage(requireContext())
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
         }
-        binding.btSbros.setOnClickListener {
-            addAvtoViewModel.resetData()
-            binding.apply {
+        binding.apply {
+            btLoadDataCom.setOnClickListener {
+                val techSeriya = edTechSeriyaCom.text.toString().trim()
+                val techNomer = edTechNomerCom.text.toString().trim()
+                val avtoRegion = edRegion.text.toString().trim()
+                val avtoNomer = edAvtoNomer.text.toString().trim()
+
+                if (validateInput(techSeriya, techNomer, avtoRegion, avtoNomer)) {
+                    Log.d(
+                        "1234",
+                        "Sending car data: $techSeriya, $techNomer, $avtoRegion, $avtoNomer"
+                    )
+                    addAvtoViewModel.sendCarData(techSeriya, techNomer, avtoRegion, avtoNomer)
+                    binding.loadLayoutCom.visibility = View.VISIBLE
+                }
+            }
+
+            btSbros.setOnClickListener {
+                addAvtoViewModel.resetData()
                 edAvtoMarkCom.text.clear()
                 edAvtoYearCom.text.clear()
                 edOrgNameCom.text.clear()
@@ -89,13 +96,12 @@ class AddAvtoFrag : Fragment(){
                 edRegion.isEnabled = true
                 edTechNomerCom.isEnabled = true
                 edTechSeriyaCom.isEnabled = true
+
             }
         }
     }
 
     private fun setupObservers() {
-
-
         addAvtoViewModel.carDataLiveData.observe(viewLifecycleOwner) { carData ->
             if (carData != null) {
                 Log.d(
@@ -111,7 +117,6 @@ class AddAvtoFrag : Fragment(){
                 binding.insideContainerCom.visibility = View.VISIBLE
             }
         }
-
         addAvtoViewModel.isContainerVisible.observe(viewLifecycleOwner) { isVisible ->
             binding.insideContainerCom.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
