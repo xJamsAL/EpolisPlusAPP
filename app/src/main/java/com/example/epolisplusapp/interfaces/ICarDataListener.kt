@@ -1,7 +1,7 @@
-package com.example.epolisplusapp.ui.dopservice
+package com.example.epolisplusapp.interfaces
 
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 
-interface CarDataListener {
+interface ICarDataListener {
     fun onCarDataReceived(addCarRequest: AddCarRequest)
 }

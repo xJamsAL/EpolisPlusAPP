@@ -17,7 +17,7 @@ import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.service.RetrofitInstance
-import com.example.epolisplusapp.ui.dopservice.CarDataListener
+import com.example.epolisplusapp.interfaces.ICarDataListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -25,10 +25,10 @@ import retrofit2.HttpException
 class AddAvtoViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
-    private var listener: CarDataListener? = null
+    private var listener: ICarDataListener? = null
 ) : ViewModel() {
-    companion object{
-        fun create (context: Context):AddAvtoViewModel{
+    companion object {
+        fun create(context: Context): AddAvtoViewModel {
             val preferenceService = PreferenceService.getInstance(context)
             val apiService = RetrofitInstance(context).api
             return AddAvtoViewModel(apiService, preferenceService)
@@ -36,13 +36,16 @@ class AddAvtoViewModel(
     }
 
 
-     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
+    val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
     val successMessageLiveData = MutableLiveData<String>()
     val errorMessageLiveData = MutableLiveData<Failure>()
     val carDataLiveData = MutableLiveData<BaseApiResponse<AddUserCarResponse>?>()
 
     fun sendCarData(techSeriya: String, techNomer: String, avtoRegion: String, avtoNomer: String) {
-        Log.d("1234", "sendCarData вызван с параметрами: techSeriya=$techSeriya, techNomer=$techNomer, avtoRegion=$avtoRegion, avtoNomer=$avtoNomer")
+        Log.d(
+            "1234",
+            "sendCarData вызван с параметрами: techSeriya=$techSeriya, techNomer=$techNomer, avtoRegion=$avtoRegion, avtoNomer=$avtoNomer"
+        )
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val accessToken = preferenceService.getAccessToken()
@@ -100,6 +103,7 @@ class AddAvtoViewModel(
             }
         }
     }
+
     fun resetData() {
         carDataLiveData.postValue(null)
     }

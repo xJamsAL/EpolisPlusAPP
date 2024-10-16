@@ -1,4 +1,4 @@
-package com.example.epolisplusapp.module
+package com.example.epolisplusapp.module.module_add_client
 
 import android.os.Bundle
 import android.view.LayoutInflater

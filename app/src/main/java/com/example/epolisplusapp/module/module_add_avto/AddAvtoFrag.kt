@@ -10,9 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.databinding.AvtoNomerBinding
-import com.example.epolisplusapp.models.BaseApiResponse
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
-import com.example.epolisplusapp.models.cabinet.response.AddUserCarResponse
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
@@ -74,29 +72,27 @@ class AddAvtoFrag : Fragment() {
     }
 
     private fun setupObservers() {
-        // Наблюдение за ошибками
+
         addAvtoViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { failure ->
             failure?.let {
                 val message = it.getErrorMessage(requireContext())
-                Log.d("1234", "Ошибка: $message")  // Лог при возникновении ошибки
+                Log.d("1234", "Ошибка: $message")
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Наблюдение за успешным сообщением
         addAvtoViewModel.successMessageLiveData.observe(viewLifecycleOwner) { success ->
-            Log.d("1234", "Успешное получение данных")  // Лог при успехе
+            Log.d("1234", "Успешное получение данных")
         }
 
-        // Наблюдение за данными автомобиля
         addAvtoViewModel.addCarRequestLiveData.observe(viewLifecycleOwner) { carData ->
             if (carData != null) {
-                Log.d("1234", "Данные автомобиля получены: $carData")  // Лог при получении данных
+                Log.d("1234", "Данные автомобиля получены: $carData")
                 updateUIWithCarData(carData)
                 binding.loadLayoutCom.visibility = View.GONE
                 binding.insideContainerCom.visibility = View.VISIBLE
             } else {
-                Log.d("1234", "Данные автомобиля отсутствуют")  // Лог при отсутствии данных
+                Log.d("1234", "Данные автомобиля отсутствуют")
                 Toast.makeText(requireContext(), "Ошибка: данные не получены", Toast.LENGTH_SHORT).show()
             }
         }
@@ -110,7 +106,7 @@ class AddAvtoFrag : Fragment() {
             edAvtoYearCom.setText(carData.ISSUE_YEAR)
         }
         disableFields()
-        Log.d("1234", "Поля ввода отключены")  // Лог после отключения полей ввода
+        Log.d("1234", "Поля ввода отключены")
     }
 
 

@@ -76,7 +76,7 @@ class DopUslugiActivity : AppCompatActivity() {
                 )
             },
             { selectedItem ->
-                val bottomSheetFragment = DopUslugiDialogFragment.newInstance(
+                val bottomSheetFragment = DopUslugiDialog.newInstance(
                     selectedItem.name,
                     selectedItem.icon,
                     selectedItem.price,

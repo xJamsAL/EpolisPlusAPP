@@ -15,7 +15,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Locale
 
-class DopUslugiDialogFragment : BottomSheetDialogFragment() {
+class DopUslugiDialog : BottomSheetDialogFragment() {
     private val baseUrl = "https://epolisplus.uz/"
 
     companion object {
@@ -24,8 +24,8 @@ class DopUslugiDialogFragment : BottomSheetDialogFragment() {
             icon: String,
             price: Int,
             info: String
-        ): DopUslugiDialogFragment {
-            val fragment = DopUslugiDialogFragment()
+        ): DopUslugiDialog {
+            val fragment = DopUslugiDialog()
             val args = Bundle().apply {
                 putString("name", name)
                 putString("icon", icon)

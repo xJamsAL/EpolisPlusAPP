@@ -615,10 +615,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/div1" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/checkBoxLayout"
+                android:id="@+id/contractInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/priceLayout"
@@ -709,7 +710,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView85" />
 
                 <Button
-                    android:id="@+id/btBack2"
+                    android:id="@+id/btContractInfoBack"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -734,7 +735,7 @@
                     app:strokeWidth="1dp" />
 
                 <Button
-                    android:id="@+id/btNext3"
+                    android:id="@+id/btContractInfoNext"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
@@ -758,7 +759,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btNext"
+                android:id="@+id/btGeneralInformationNext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -780,14 +781,14 @@
                 app:strokeWidth="1dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btLayout2"
+                android:id="@+id/ClientDataLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:visibility="gone">
 
                 <Button
-                    android:id="@+id/bt_back"
+                    android:id="@+id/btClientDataBack"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -808,7 +809,7 @@
                     app:strokeWidth="1dp" />
 
                 <Button
-                    android:id="@+id/btNext2"
+                    android:id="@+id/btClientDataNext"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"
