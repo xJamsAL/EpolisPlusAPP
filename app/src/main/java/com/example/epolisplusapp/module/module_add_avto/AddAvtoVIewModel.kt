@@ -1,20 +1,22 @@
 package com.example.epolisplusapp.module.module_add_avto
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
+import com.example.epolisplusapp.models.BaseApiResponse
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.cabinet.request.CheckCarRequest
-import com.example.epolisplusapp.models.cabinet.response.CheckCarResponse
+import com.example.epolisplusapp.models.cabinet.response.AddUserCarResponse
 import com.example.epolisplusapp.models.error_models.ApiErrorMessage
 import com.example.epolisplusapp.models.error_models.Failure
 import com.example.epolisplusapp.models.error_models.GenericFailure
 import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
+import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.ui.dopservice.CarDataListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,14 +27,19 @@ class AddAvtoViewModel(
     private val preferenceService: PreferenceService,
     private var listener: CarDataListener? = null
 ) : ViewModel() {
+    companion object{
+        fun create (context: Context):AddAvtoViewModel{
+            val preferenceService = PreferenceService.getInstance(context)
+            val apiService = RetrofitInstance(context).api
+            return AddAvtoViewModel(apiService, preferenceService)
+        }
+    }
 
-    val checkCarRequestLiveData = MutableLiveData<CheckCarRequest>()
-    val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
+
+     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
     val successMessageLiveData = MutableLiveData<String>()
     val errorMessageLiveData = MutableLiveData<Failure>()
-    val carDataLiveData = MutableLiveData<CheckCarResponse?>()
-    val isContainerVisible = MutableLiveData<Boolean>()
-    val isSecondContainerVisible = MutableLiveData<Boolean>()
+    val carDataLiveData = MutableLiveData<BaseApiResponse<AddUserCarResponse>?>()
 
     fun sendCarData(techSeriya: String, techNomer: String, avtoRegion: String, avtoNomer: String) {
         Log.d("1234", "sendCarData вызван с параметрами: techSeriya=$techSeriya, techNomer=$techNomer, avtoRegion=$avtoRegion, avtoNomer=$avtoNomer")
@@ -50,7 +57,7 @@ class AddAvtoViewModel(
                     techPassportNumber = techNomer,
                     techPassportSeria = techSeriya
                 )
-                checkCarRequestLiveData.postValue(request)
+
                 val response = apiService.checkCar("Bearer $accessToken", request)
                 if (response.response.ERROR == "0") {
                     val carData = response.response
@@ -93,14 +100,8 @@ class AddAvtoViewModel(
             }
         }
     }
-
-    fun MutableLiveData<CheckCarResponse>.postValue(response: CheckCarResponse) {
-        this.postValue(response)
-    }
     fun resetData() {
         carDataLiveData.postValue(null)
-        isContainerVisible.postValue(false)
-        isSecondContainerVisible.postValue(false)
     }
 
 }
