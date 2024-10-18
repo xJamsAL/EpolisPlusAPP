@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.databinding.AvtoNomerBinding
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
+import com.example.epolisplusapp.models.error_models.ApiErrorMessage
+import com.example.epolisplusapp.models.error_models.GenericFailure
+import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
@@ -74,15 +76,21 @@ class AddAvtoFrag : Fragment() {
     private fun setupObservers() {
 
         addAvtoViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { failure ->
-            failure?.let {
-                val message = it.getErrorMessage(requireContext())
-                Log.d("1234", "Ошибка: $message")
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        addAvtoViewModel.successMessageLiveData.observe(viewLifecycleOwner) { success ->
-            Log.d("1234", "Успешное получение данных")
+            if (failure is ApiErrorMessage)
+                CommonUtils.showCustomToast(
+                    requireContext(),
+                    failure.getErrorMessage(requireContext())
+                )
+            if (failure is GenericFailure)
+                CommonUtils.showCustomToast(
+                    requireContext(),
+                    failure.getErrorMessage(requireContext())
+                )
+            if (failure is NetworkFailure)
+                CommonUtils.showCustomToast(
+                    requireContext(),
+                    failure.getErrorMessage(requireContext())
+                )
         }
 
         addAvtoViewModel.addCarRequestLiveData.observe(viewLifecycleOwner) { carData ->
@@ -93,13 +101,15 @@ class AddAvtoFrag : Fragment() {
                 binding.insideContainerCom.visibility = View.VISIBLE
             } else {
                 Log.d("1234", "Данные автомобиля отсутствуют")
-                Toast.makeText(requireContext(), "Ошибка: данные не получены", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun updateUIWithCarData(carData: AddCarRequest) {
-        Log.d("1234", "Обновление UI с данными автомобиля: ${carData.ORGNAME}, ${carData.MODEL_NAME}, ${carData.ISSUE_YEAR}")
+        Log.d(
+            "1234",
+            "Обновление UI с данными автомобиля: ${carData.ORGNAME}, ${carData.MODEL_NAME}, ${carData.ISSUE_YEAR}"
+        )
         binding.apply {
             edOrgNameCom.setText(carData.ORGNAME)
             edAvtoMarkCom.setText(carData.MODEL_NAME)

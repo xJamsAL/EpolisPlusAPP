@@ -1,7 +1,6 @@
 package com.example.epolisplusapp.ui.dopservice
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,11 +23,14 @@ import retrofit2.HttpException
 class DopFormsViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
+
 ) : ViewModel() {
 
     val carInfoLiveData = MutableLiveData<List<CarInfo>>()
     val errorLiveData = MutableLiveData<Failure>()
     val successLiveData = MutableLiveData<Boolean>()
+
+
 
     companion object {
         fun create(context: Context):DopFormsViewModel {
@@ -44,7 +46,7 @@ class DopFormsViewModel(
             try {
                 val accessToken = preferenceService.getAccessToken()
                 if (accessToken.isEmpty()) {
-                    Log.e("1234", "Access token is null")
+                    Log.e("1234", "Access token is empty")
                     errorLiveData.postValue(TokenFailure())
                     return@launch
                 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.DopFormsAdapter
@@ -18,15 +19,16 @@ import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.profile.CarInfo
 import com.example.epolisplusapp.module.module_add_client.AddClientFrag
 import com.example.epolisplusapp.module.module_add_avto.AddAvtoFrag
+import com.example.epolisplusapp.module.module_add_avto.AddAvtoViewModel
 import com.example.epolisplusapp.util.CommonUtils
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DopFormsFrag : BottomSheetDialogFragment(), ICarDataListener {
+class DopFormsFrag : BottomSheetDialogFragment() {
 
     private lateinit var binding: DopUslugiOformlenBinding
     private lateinit var dopFormsViewModel: DopFormsViewModel
     private lateinit var dopFormsAdapter: DopFormsAdapter
-    private var data: AddCarRequest? = null
+    private var addCarRequestData: AddCarRequest? = null
     private var selectedCar: CarInfo? = null
 
     override fun onCreateView(
@@ -175,7 +177,7 @@ class DopFormsFrag : BottomSheetDialogFragment(), ICarDataListener {
     }
 
     private fun navigateGeneralInfoNext() {
-        Log.d("1234", "pressedTv called")
+        Log.d("1234", "navigateGeneralInfoNext called")
         binding.apply {
             cItem1.setBackgroundResource(R.drawable.tv_left_rounded)
             ivItem1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.grey))
@@ -186,8 +188,8 @@ class DopFormsFrag : BottomSheetDialogFragment(), ICarDataListener {
             ClientDataLayout.visibility = View.VISIBLE
             clientDataContainer.visibility = View.VISIBLE
             phoneContainer.visibility = View.VISIBLE
-            data?.let { dopFormsViewModel.sendCarData2(it) }
-            Log.d("1234", "pressedtv$data")
+
+
             ivItem2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
             tvItem2.setTextColor(ContextCompat.getColor(requireContext(), R.color.black_text_color))
         }
@@ -204,7 +206,6 @@ class DopFormsFrag : BottomSheetDialogFragment(), ICarDataListener {
         }
         binding.rcDopForms.adapter = dopFormsAdapter
     }
-
 
     @SuppressLint("UseCompatTextViewDrawableApis")
     private fun updateButtonGeneralInfoNext() {
@@ -226,10 +227,6 @@ class DopFormsFrag : BottomSheetDialogFragment(), ICarDataListener {
 
     private fun updateNextButtonState() {
         binding.btGeneralInformationNext.isEnabled = selectedCar != null
-    }
-
-    override fun onCarDataReceived(addCarRequest: AddCarRequest) {
-        dopFormsViewModel.sendCarData2(addCarRequest)
     }
 
 

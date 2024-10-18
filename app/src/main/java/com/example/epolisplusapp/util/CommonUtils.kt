@@ -6,12 +6,16 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.Gravity
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -27,6 +31,20 @@ import java.util.Locale
 
 object CommonUtils {
 
+
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+
+        val textView = layout.findViewById<TextView>(R.id.tvCustomSnackBar)
+        textView.text = message
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_LONG
+        toast.view = layout
+        toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 1000)
+        toast.show()
+    }
     fun setupToolbar(toolbar: Toolbar, activity: AppCompatActivity) {
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.setDisplayShowTitleEnabled(true)

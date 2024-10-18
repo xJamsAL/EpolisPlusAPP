@@ -18,6 +18,7 @@ import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.interfaces.ICarDataListener
+import com.example.epolisplusapp.ui.dopservice.SharedDopServiceViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -25,15 +26,20 @@ import retrofit2.HttpException
 class AddAvtoViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
+    private val sharedDopServiceViewModel: SharedDopServiceViewModel,
     private var listener: ICarDataListener? = null
+
 ) : ViewModel() {
     companion object {
         fun create(context: Context): AddAvtoViewModel {
             val preferenceService = PreferenceService.getInstance(context)
             val apiService = RetrofitInstance(context).api
-            return AddAvtoViewModel(apiService, preferenceService)
+            val sharedDopServiceViewModel = SharedDopServiceViewModel()
+            return AddAvtoViewModel(apiService, preferenceService, sharedDopServiceViewModel)
         }
     }
+
+
 
 
     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
@@ -90,8 +96,9 @@ class AddAvtoViewModel(
                     Log.d("1234", "Обновление addCarRequestLiveData: $addCarRequest")
                     addCarRequestLiveData.postValue(addCarRequest)
                     successMessageLiveData.postValue("Данные успешно получены")
-                    Log.d("1234", "Передаем данные слушателю: $addCarRequest")
+                    sharedDopServiceViewModel.setAddCarRequest(addCarRequest)
                     listener?.onCarDataReceived(addCarRequest)
+                    Log.d("1234", "Передаем данные слушателю: $addCarRequest")
 
                 } else {
                     errorMessageLiveData.postValue(ApiErrorMessage(response.message))
@@ -103,7 +110,6 @@ class AddAvtoViewModel(
             }
         }
     }
-
     fun resetData() {
         carDataLiveData.postValue(null)
     }
