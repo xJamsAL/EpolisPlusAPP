@@ -56,7 +56,8 @@ class PartnersFragment : Fragment() {
 
                 progressBarBackPart.visibility = View.VISIBLE
                 val response = apiService.getPartners()
-                partnersAdapter.updateData(response.response)
+                val partnersList = response.response
+                partnersAdapter.updateData(partnersList)
                 progressBarBackPart.visibility = View.GONE
             } catch (e: HttpException) {
 

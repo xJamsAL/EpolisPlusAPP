@@ -8,8 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.databinding.AuthActivityMainBinding
-import com.example.epolisplusapp.models.auth.CheckPhoneRequest
-import com.example.epolisplusapp.models.auth.CheckPhoneResponse
+import com.example.epolisplusapp.models.auth.request.CheckPhoneRequest
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
 import kotlinx.coroutines.launch
@@ -51,7 +50,7 @@ class AuthMain : AppCompatActivity() {
                 CommonUtils.hideKeyboard(this@AuthMain)
                 binding.progressBarBack.visibility = View.VISIBLE
                 val formattedPhoneNumber = CommonUtils.formatPhoneNumber(phoneNumber)
-                val response: CheckPhoneResponse =
+                val response =
                     retrofitInstance.api.checkPhone(CheckPhoneRequest(formattedPhoneNumber))
                 binding.progressBarBack.visibility = View.GONE
 

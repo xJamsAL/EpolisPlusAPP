@@ -177,5 +177,11 @@
     <string name="dop_dialog_tv_price_polis">Цена полиса</string>
     <string name="dop_dialog_tv_payment_method">Способ оплаты</string>
 
+    <string name="phone_fail">Неправильный номер телефона</string>
+    <string name="code_fail">Неправильный код</string>
+    <string name="input_fail">Поля не заполнены</string>
+    <string name="netwotk_fail">Ошибка сети</string>
+    <string name="invalid_token">Токен недействителен</string>
+    <string name="unknow_error">Неизвестная ошибка</string>
 </resources>
 

@@ -11,10 +11,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.epolisplusapp.R
-import com.example.epolisplusapp.models.partners.Response
+import com.example.epolisplusapp.models.partners.GetPartnersResponse
 
 
-class PartnersAdapter(private var partnersList: List<Response> = listOf()) : RecyclerView.Adapter<PartnersAdapter.PartnersViewHolder>() {
+class PartnersAdapter(private var partnersList: List<GetPartnersResponse> = listOf()) : RecyclerView.Adapter<PartnersAdapter.PartnersViewHolder>() {
 
     private val baseUrl = "https://epolisplus.uz/"
 
@@ -30,7 +30,7 @@ class PartnersAdapter(private var partnersList: List<Response> = listOf()) : Rec
     override fun getItemCount() = partnersList.size
 
 
-    fun updateData(newPartnersList: List<Response>) {
+    fun updateData(newPartnersList: List<GetPartnersResponse>) {
         partnersList = newPartnersList
         notifyDataSetChanged()
     }
@@ -40,7 +40,7 @@ class PartnersAdapter(private var partnersList: List<Response> = listOf()) : Rec
         private val btSite: Button = itemView.findViewById(R.id.btWebsite)
         private val imageView: ImageView = itemView.findViewById(R.id.ivCompany)
 
-        fun bind(partner: Response) {
+        fun bind(partner: GetPartnersResponse) {
             btSite.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(partner.site))

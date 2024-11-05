@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.R
-import com.example.epolisplusapp.models.auth.ResetPasswordRequest
+import com.example.epolisplusapp.models.auth.request.ResetPasswordRequest
 import com.example.epolisplusapp.util.CommonUtils
 import com.google.android.material.appbar.MaterialToolbar
 import eightbitlab.com.blurview.BlurView

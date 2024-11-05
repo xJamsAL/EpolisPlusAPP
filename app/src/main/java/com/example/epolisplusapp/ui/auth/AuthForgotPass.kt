@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.epolisplusapp.databinding.AuthActivityForgotPassBinding
-import com.example.epolisplusapp.models.auth.ForgotPasswordRequest
+import com.example.epolisplusapp.models.auth.request.ForgotPasswordRequest
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
 
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class AuthForgotPass : AppCompatActivity() {
-    private lateinit var retrofitInstance:RetrofitInstance
+    private lateinit var retrofitInstance: RetrofitInstance
     private lateinit var binder: AuthActivityForgotPassBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

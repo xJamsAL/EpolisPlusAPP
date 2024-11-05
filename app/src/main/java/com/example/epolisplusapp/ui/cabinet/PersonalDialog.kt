@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.models.cabinet.UpdateProfileRequest
+import com.example.epolisplusapp.models.cabinet.request.UpdateProfileRequest
 import com.example.epolisplusapp.models.profile.SharedViewModel
 import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.ui.cabinet.CabinetFragment

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
-import com.example.epolisplusapp.interfaces.OnCarDeleteClickListener
+import com.example.epolisplusapp.interfaces.IOnCarDeleteClickListener
 import com.example.epolisplusapp.models.profile.CarInfo
 import com.google.android.material.card.MaterialCardView
 
-class CabinetAdapter(private var cardList: List<CarInfo>,    private val deleteClickListener: OnCarDeleteClickListener) :
+class CabinetAdapter(private var cardList: List<CarInfo>,    private val deleteClickListener: IOnCarDeleteClickListener) :
     RecyclerView.Adapter<CabinetAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

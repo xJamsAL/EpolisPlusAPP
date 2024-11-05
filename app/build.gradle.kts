@@ -58,8 +58,8 @@ dependencies {
     implementation("com.caverock:androidsvg:1.4")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
 
 
 

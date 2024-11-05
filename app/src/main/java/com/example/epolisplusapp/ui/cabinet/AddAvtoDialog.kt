@@ -11,9 +11,9 @@ import android.widget.Toast
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.databinding.CabinetDialogAddAvtoBinding
-import com.example.epolisplusapp.models.cabinet.AddCarRequest
-import com.example.epolisplusapp.models.cabinet.CheckCarRequest
-import com.example.epolisplusapp.models.cabinet.VehicleInformationResponse
+import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
+import com.example.epolisplusapp.models.cabinet.request.CheckCarRequest
+import com.example.epolisplusapp.models.cabinet.response.AddUserCarResponse
 import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
@@ -32,7 +32,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
     private lateinit var progressBar: BlurView
     private var _binding: CabinetDialogAddAvtoBinding? = null
     private val binding get() = _binding!!
-    private var savedVehicleInformationResponse: VehicleInformationResponse? = null
+    private var savedResponse: AddUserCarResponse? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -130,7 +130,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
 
                 if (response.response.ERROR == "0") {
                     val carData = response.response
-                    savedVehicleInformationResponse = carData
+                    savedResponse = carData
                     withContext(Dispatchers.Main) {
                         binding.edOrgName.setText(carData.ORGNAME)
                         binding.edAvtoMark.setText(carData.MODEL_NAME)
@@ -192,7 +192,7 @@ class AddAvtoDialog: BottomSheetDialogFragment() {
                     return@launch
                 }
 
-                val response = savedVehicleInformationResponse ?: run {
+                val response = savedResponse ?: run {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Нет данных для отправки", Toast.LENGTH_SHORT).show()
                     }

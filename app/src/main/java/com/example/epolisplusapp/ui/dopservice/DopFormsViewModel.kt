@@ -1,14 +1,21 @@
 package com.example.epolisplusapp.ui.dopservice
 
-import android.content.SharedPreferences
+import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.models.cabinet.AddCarRequest
-import com.example.epolisplusapp.models.profile.CarInfo
+import com.example.epolisplusapp.interfaces.ICarDataListener
+import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
+import com.example.epolisplusapp.models.error_models.ApiErrorMessage
+import com.example.epolisplusapp.models.error_models.Failure
+import com.example.epolisplusapp.models.error_models.GenericFailure
+import com.example.epolisplusapp.models.error_models.NetworkFailure
+import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
+import com.example.epolisplusapp.service.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,63 +23,45 @@ import retrofit2.HttpException
 
 class DopFormsViewModel(
     private val apiService: MainApi.ApiService,
-    private val sharedPreferences: SharedPreferences,
-) : ViewModel(){
+    private val preferenceService: PreferenceService
+) : ViewModel(), ICarDataListener {
 
-    val carInfoLiveData = MutableLiveData<List<CarInfo>>()
-    val errorLiveData = MutableLiveData<String>()
-    val successLiveData = MutableLiveData<Boolean>()
+    val errorLiveData = MutableLiveData<Failure>()
 
+    private val _carDataReceived = MutableLiveData<AddCarRequest>()
+    val carDataReceived: LiveData<AddCarRequest> get() = _carDataReceived
 
+    private val _navigateGeneralInfoNext = MutableLiveData(false)
+    val navigateGeneralInfoNext: LiveData<Boolean> = _navigateGeneralInfoNext
 
-    fun sendCarData2(addCarRequest: AddCarRequest) {
-        Log.d("1234", "sendCarData2 called with: $addCarRequest")
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                //     val accessToken = sharedPreferences.getString("access_token", null)
-                PreferenceService.getInstance(this).getAccesToken()
-                if (accessToken == null) {
-                    Log.e("1234", "Access token is null")
-                    errorLiveData.postValue("Токен недействителен")
-                    return@launch
-                }
+    private var carData: AddCarRequest? = null
 
-                Log.d("1234", "Sending request to add car with access token")
-                val addCarResponse = apiService.addCar("Bearer $accessToken", addCarRequest)
+    override fun onCarDataReceived(addCarRequest: AddCarRequest) {
 
-                withContext(Dispatchers.Main) {
-                    Log.d("1234", "Received response: $addCarResponse")
-                    if (addCarResponse.status == 200) {
-                        Log.d("1234", "Car added successfully")
-                        successLiveData.postValue(true)
-                    } else {
-                        Log.e("1234", "Error adding car: ${addCarResponse.message}")
-                        errorLiveData.postValue("Ошибка: ${addCarResponse.message}")
-                    }
-                }
-            } catch (e: HttpException) {
-                Log.e("1234", "HttpException: ${e.message()}")
-                errorLiveData.postValue("Ошибка сети: ${e.message()}")
-            } catch (e: Exception) {
-                Log.e("1234", "Exception: ${e.message}")
-                errorLiveData.postValue("Произошла ошибка: ${e.message}")
-            }
+        carData = addCarRequest
+        _carDataReceived.postValue(addCarRequest)
+        Log.d("1234", "Data received in DopFormsViewModel: $addCarRequest")
+
+    }
+
+    fun callOnClickBtn() {
+        Log.d("1234", "Данные перед отправкой: $carData")
+        if (carData != null) {
+            _navigateGeneralInfoNext.postValue(true)
+        } else {
+            errorLiveData.postValue(GenericFailure())
         }
     }
 
+    fun resetNavigation() {
+        _navigateGeneralInfoNext.value = false
+    }
 
-    fun loadCarInfo(accessToken: String) {
-        viewModelScope.launch {
-            try {
-                val response = apiService.getUserProfile("Bearer $accessToken")
-                val carInfo = response.response.car_info
-                carInfoLiveData.postValue(carInfo)
-            } catch (e: HttpException) {
-
-                errorLiveData.postValue("Error: ${e.message()}")
-            } catch (e: Exception) {
-                errorLiveData.postValue("Error: ${e.localizedMessage}")
-            }
+    companion object {
+        fun create(context: Context): DopFormsViewModel {
+            val preferenceService = PreferenceService.getInstance(context)
+            val apiService = RetrofitInstance(context).api
+            return DopFormsViewModel(apiService, preferenceService)
         }
     }
 }
