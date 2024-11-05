@@ -48,6 +48,7 @@ class DopFormsFrag : BottomSheetDialogFragment() {
 
         dopFormsViewModel.navigateGeneralInfoNext.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate == true) {
+                Log.d("1234", "asdsad$shouldNavigate")
                 navigateGeneralInfoNext()  // Изменяем View
                 dopFormsViewModel.resetNavigation() // Сбрасываем навигационный флаг
             } else {
