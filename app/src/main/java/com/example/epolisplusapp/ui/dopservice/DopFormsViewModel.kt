@@ -37,10 +37,11 @@ class DopFormsViewModel(
     private var carData: AddCarRequest? = null
 
     override fun onCarDataReceived(addCarRequest: AddCarRequest) {
-        // Устанавливаем значение `carData` и обновляем LiveData
+
         carData = addCarRequest
-        _carDataReceived.postValue(addCarRequest)  // Это для уведомления об изменениях в Fragment
+        _carDataReceived.postValue(addCarRequest)
         Log.d("1234", "Data received in DopFormsViewModel: $addCarRequest")
+
     }
 
     fun callOnClickBtn() {
