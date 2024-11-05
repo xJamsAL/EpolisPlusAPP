@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
+import com.example.epolisplusapp.interfaces.ICarDataListener
 import com.example.epolisplusapp.models.BaseApiResponse
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.cabinet.request.CheckCarRequest
@@ -17,8 +18,6 @@ import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.models.error_models.TokenFailure
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.service.RetrofitInstance
-import com.example.epolisplusapp.interfaces.ICarDataListener
-import com.example.epolisplusapp.ui.dopservice.SharedDopServiceViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -26,32 +25,24 @@ import retrofit2.HttpException
 class AddAvtoViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
-    private val sharedDopServiceViewModel: SharedDopServiceViewModel,
-    private var listener: ICarDataListener? = null
+    private val listener: ICarDataListener
 
 ) : ViewModel() {
+
     companion object {
-        fun create(context: Context): AddAvtoViewModel {
+        fun create(context: Context, listener: ICarDataListener): AddAvtoViewModel {
             val preferenceService = PreferenceService.getInstance(context)
             val apiService = RetrofitInstance(context).api
-            val sharedDopServiceViewModel = SharedDopServiceViewModel()
-            return AddAvtoViewModel(apiService, preferenceService, sharedDopServiceViewModel)
+            return AddAvtoViewModel(apiService, preferenceService, listener)
         }
     }
 
-
-
-
     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
-    val successMessageLiveData = MutableLiveData<String>()
+
     val errorMessageLiveData = MutableLiveData<Failure>()
-    val carDataLiveData = MutableLiveData<BaseApiResponse<AddUserCarResponse>?>()
+    private val carDataLiveData = MutableLiveData<BaseApiResponse<AddUserCarResponse>?>()
 
     fun sendCarData(techSeriya: String, techNomer: String, avtoRegion: String, avtoNomer: String) {
-        Log.d(
-            "1234",
-            "sendCarData вызван с параметрами: techSeriya=$techSeriya, techNomer=$techNomer, avtoRegion=$avtoRegion, avtoNomer=$avtoNomer"
-        )
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val accessToken = preferenceService.getAccessToken()
@@ -70,7 +61,6 @@ class AddAvtoViewModel(
                 val response = apiService.checkCar("Bearer $accessToken", request)
                 if (response.response.ERROR == "0") {
                     val carData = response.response
-                    Log.d("1234", "Получены данные автомобиля: $carData")
                     val addCarRequest = AddCarRequest(
                         BODY_NUMBER = carData.BODY_NUMBER,
                         ENGINE_NUMBER = carData.ENGINE_NUMBER,
@@ -92,14 +82,10 @@ class AddAvtoViewModel(
                         USE_TERRITORY = carData.USE_TERRITORY,
                         VEHICLE_TYPE_ID = carData.VEHICLE_TYPE_ID
                     )
-
-                    Log.d("1234", "Обновление addCarRequestLiveData: $addCarRequest")
+                    listener.onCarDataReceived(addCarRequest)
                     addCarRequestLiveData.postValue(addCarRequest)
-                    successMessageLiveData.postValue("Данные успешно получены")
-                    sharedDopServiceViewModel.setAddCarRequest(addCarRequest)
-                    listener?.onCarDataReceived(addCarRequest)
-                    Log.d("1234", "Передаем данные слушателю: $addCarRequest")
 
+                    Log.d("1234", "pass data: $addCarRequest")
                 } else {
                     errorMessageLiveData.postValue(ApiErrorMessage(response.message))
                 }

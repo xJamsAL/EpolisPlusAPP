@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.adapters.LitroCalculatorAdapter
@@ -31,7 +30,6 @@ class DopUslugiActivity : AppCompatActivity() {
     private lateinit var apiService: MainApi.ApiService
     private lateinit var binding: DopUslugiActivityBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var sharedViewModel: SharedDopServiceViewModel
     private var items: Int? = null
 
     private var discountPercent: Int = 0
@@ -45,11 +43,9 @@ class DopUslugiActivity : AppCompatActivity() {
         setContentView(binding.root)
         val rootView = findViewById<View>(android.R.id.content)
         sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        sharedViewModel = ViewModelProvider(this)[SharedDopServiceViewModel::class.java]
         binding.rcDop.layoutManager = GridLayoutManager(this, 2)
         CommonUtils.setupToolbar(binding.dopToolbar, this)
         CommonUtils.setupBlurView(this, binding.dopBar, rootView)
-
 
         dopuslugiAdapter = LitroCalculatorAdapter(
             emptyList(), R.string.dop_uslugi_currency, this, discountPercent, discountLength,
@@ -105,6 +101,7 @@ class DopUslugiActivity : AppCompatActivity() {
 
         }
     }
+
 
     private fun fetchDopUslugiData() {
         CoroutineScope(Dispatchers.IO).launch {

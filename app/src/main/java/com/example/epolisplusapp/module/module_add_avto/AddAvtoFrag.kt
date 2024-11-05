@@ -1,7 +1,6 @@
 package com.example.epolisplusapp.module.module_add_avto
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.error_models.ApiErrorMessage
 import com.example.epolisplusapp.models.error_models.GenericFailure
 import com.example.epolisplusapp.models.error_models.NetworkFailure
+import com.example.epolisplusapp.ui.dopservice.DopFormsViewModel
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
@@ -20,6 +20,8 @@ import com.example.epolisplusapp.util.EditSpaces
 class AddAvtoFrag : Fragment() {
 
     private lateinit var addAvtoViewModel: AddAvtoViewModel
+    private lateinit var dopFormsViewModel: DopFormsViewModel
+
     private var _binding: AvtoNomerBinding? = null
     private val binding get() = _binding!!
 
@@ -37,7 +39,8 @@ class AddAvtoFrag : Fragment() {
         val carNomer: EditText = view.findViewById(R.id.edAvtoNomer)
         carNomer.addTextChangedListener(EditSpaces(carNomer))
         binding.edTechNomerCom.addTextChangedListener(EditHideKeyboard(binding.edTechNomerCom))
-        addAvtoViewModel = AddAvtoViewModel.create(requireContext())
+        dopFormsViewModel = DopFormsViewModel.create(requireContext())
+        addAvtoViewModel = AddAvtoViewModel.create(requireContext(), dopFormsViewModel)
         setupEditTexts()
         setupObservers()
 
@@ -95,28 +98,20 @@ class AddAvtoFrag : Fragment() {
 
         addAvtoViewModel.addCarRequestLiveData.observe(viewLifecycleOwner) { carData ->
             if (carData != null) {
-                Log.d("1234", "Данные автомобиля получены: $carData")
                 updateUIWithCarData(carData)
                 binding.loadLayoutCom.visibility = View.GONE
                 binding.insideContainerCom.visibility = View.VISIBLE
-            } else {
-                Log.d("1234", "Данные автомобиля отсутствуют")
             }
         }
     }
 
     private fun updateUIWithCarData(carData: AddCarRequest) {
-        Log.d(
-            "1234",
-            "Обновление UI с данными автомобиля: ${carData.ORGNAME}, ${carData.MODEL_NAME}, ${carData.ISSUE_YEAR}"
-        )
         binding.apply {
             edOrgNameCom.setText(carData.ORGNAME)
             edAvtoMarkCom.setText(carData.MODEL_NAME)
             edAvtoYearCom.setText(carData.ISSUE_YEAR)
         }
         disableFields()
-        Log.d("1234", "Поля ввода отключены")
     }
 
 
@@ -137,7 +132,6 @@ class AddAvtoFrag : Fragment() {
     }
 
     private fun disableFields() {
-        Log.d("1234", "Disabling input fields")
         binding.apply {
             edOrgNameCom.isEnabled = false
             edAvtoMarkCom.isEnabled = false

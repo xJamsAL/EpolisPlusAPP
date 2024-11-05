@@ -74,14 +74,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView57">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cItem1"
+            android:id="@+id/cGeneralInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/tv_rounded">
 
             <TextView
-                android:id="@+id/tvItem1"
+                android:id="@+id/tvGeneralInfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,11 +92,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivItem1"
+                app:layout_constraintTop_toBottomOf="@+id/ivGeneralInfoIcon"
                 tools:ignore="SmallSp" />
 
             <ImageView
-                android:id="@+id/ivItem1"
+                android:id="@+id/ivGeneralInfoIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -108,13 +108,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cItem2"
+            android:id="@+id/cClientDataLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/tvItem2"
+                android:id="@+id/tvClientDataText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -125,11 +125,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivItem2"
+                app:layout_constraintTop_toBottomOf="@+id/ivClientDataIcon"
                 tools:ignore="SmallSp" />
 
             <ImageView
-                android:id="@+id/ivItem2"
+                android:id="@+id/ivClientDataIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -141,13 +141,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cItem3"
+            android:id="@+id/cContractInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/tvItem3"
+                android:id="@+id/tvContractInfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,11 +158,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivItem3"
+                app:layout_constraintTop_toBottomOf="@+id/ivContractInfoIcon"
                 tools:ignore="SmallSp" />
 
             <ImageView
-                android:id="@+id/ivItem3"
+                android:id="@+id/ivContractInfoIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -175,13 +175,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cItem4"
+            android:id="@+id/cPayLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/tvItem4"
+                android:id="@+id/tvPayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -192,12 +192,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivItem4"
+                app:layout_constraintTop_toBottomOf="@+id/ivPayIcon"
                 app:layout_constraintVertical_bias="0.37"
                 tools:ignore="SmallSp" />
 
             <ImageView
-                android:id="@+id/ivItem4"
+                android:id="@+id/ivPayIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -440,9 +440,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/container1"
+                android:id="@+id/CarListContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -481,10 +482,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/dotted_line"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/container1" />
+                app:layout_constraintTop_toBottomOf="@id/CarListContainer" />
 
             <FrameLayout
                 android:id="@+id/frag1"
@@ -618,8 +620,7 @@
                 android:id="@+id/contractInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/priceLayout"
