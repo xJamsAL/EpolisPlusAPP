@@ -49,10 +49,18 @@ class DopFormsFrag : BottomSheetDialogFragment() {
         dopFormsViewModel.navigateGeneralInfoNext.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate == true) {
                 Log.d("1234", "asdsad$shouldNavigate")
-                navigateGeneralInfoNext()  // Изменяем View
-                dopFormsViewModel.resetNavigation() // Сбрасываем навигационный флаг
+                navigateGeneralInfoNext()
+                dopFormsViewModel.resetNavigation()
             } else {
                 Log.d("1234", "Ошибка в наблюдении за navigateGeneralInfoNext")
+            }
+        }
+
+        dopFormsViewModel.carDataReceived.observe(viewLifecycleOwner){data ->
+            Log.d("1234", "carDataReceived observe frag = ${data} ")
+            if (data != null) {
+                Log.d("1234", "poluchilos")
+                dopFormsViewModel.callOnClickBtn()
             }
         }
 

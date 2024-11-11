@@ -2,8 +2,10 @@ package com.example.epolisplusapp.module.module_add_avto
 
 import android.content.Context
 import android.util.Log
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.epolisplusapp.api.MainApi
 import com.example.epolisplusapp.interfaces.ICarDataListener
@@ -16,15 +18,19 @@ import com.example.epolisplusapp.models.error_models.Failure
 import com.example.epolisplusapp.models.error_models.GenericFailure
 import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.models.error_models.TokenFailure
+import com.example.epolisplusapp.models.profile.SharedViewModel
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.service.RetrofitInstance
+import com.example.epolisplusapp.ui.dopservice.DopFormsSharedViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AddAvtoViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
+    private val sharedViewModel: DopFormsSharedViewModel,
     private val listener: ICarDataListener
 
 ) : ViewModel() {
@@ -33,7 +39,9 @@ class AddAvtoViewModel(
         fun create(context: Context, listener: ICarDataListener): AddAvtoViewModel {
             val preferenceService = PreferenceService.getInstance(context)
             val apiService = RetrofitInstance(context).api
-            return AddAvtoViewModel(apiService, preferenceService, listener)
+            val sharedViewModel =
+                ViewModelProvider(context as FragmentActivity)[DopFormsSharedViewModel::class.java]
+            return AddAvtoViewModel(apiService, preferenceService, sharedViewModel, listener)
         }
     }
 
@@ -47,7 +55,9 @@ class AddAvtoViewModel(
             try {
                 val accessToken = preferenceService.getAccessToken()
                 if (accessToken.isEmpty()) {
-                    errorMessageLiveData.postValue(TokenFailure())
+                    withContext(Dispatchers.Main) {
+                        errorMessageLiveData.value = TokenFailure()
+                    }
                     return@launch
                 }
 
@@ -59,43 +69,51 @@ class AddAvtoViewModel(
                 )
 
                 val response = apiService.checkCar("Bearer $accessToken", request)
-                if (response.response.ERROR == "0") {
-                    val carData = response.response
-                    val addCarRequest = AddCarRequest(
-                        BODY_NUMBER = carData.BODY_NUMBER,
-                        ENGINE_NUMBER = carData.ENGINE_NUMBER,
-                        FIRST_NAME = carData.FIRST_NAME,
-                        FY = carData.FY,
-                        GOV_NUMBER = "$avtoRegion$formattedTechNomer",
-                        INN = carData.INN,
-                        ISSUE_YEAR = carData.ISSUE_YEAR,
-                        LAST_NAME = carData.LAST_NAME,
-                        MARKA_ID = carData.MARKA_ID,
-                        MIDDLE_NAME = carData.MIDDLE_NAME,
-                        MODEL_ID = carData.MODEL_ID,
-                        MODEL_NAME = carData.MODEL_NAME,
-                        ORGNAME = carData.ORGNAME,
-                        PINFL = carData.PINFL,
-                        TECH_NUMBER = techNomer,
-                        TECH_PASSPORT_ISSUE_DATE = carData.TECH_PASSPORT_ISSUE_DATE,
-                        TECH_SERIYA = techSeriya,
-                        USE_TERRITORY = carData.USE_TERRITORY,
-                        VEHICLE_TYPE_ID = carData.VEHICLE_TYPE_ID
-                    )
-                    listener.onCarDataReceived(addCarRequest)
-                    addCarRequestLiveData.postValue(addCarRequest)
-
-                    Log.d("1234", "pass data: $addCarRequest")
-                } else {
-                    errorMessageLiveData.postValue(ApiErrorMessage(response.message))
+                withContext(Dispatchers.Main) {
+                    if (response.response.ERROR == "0") {
+                        val carData = response.response
+                        val addCarRequest = AddCarRequest(
+                            BODY_NUMBER = carData.BODY_NUMBER,
+                            ENGINE_NUMBER = carData.ENGINE_NUMBER,
+                            FIRST_NAME = carData.FIRST_NAME,
+                            FY = carData.FY,
+                            GOV_NUMBER = "$avtoRegion$formattedTechNomer",
+                            INN = carData.INN,
+                            ISSUE_YEAR = carData.ISSUE_YEAR,
+                            LAST_NAME = carData.LAST_NAME,
+                            MARKA_ID = carData.MARKA_ID,
+                            MIDDLE_NAME = carData.MIDDLE_NAME,
+                            MODEL_ID = carData.MODEL_ID,
+                            MODEL_NAME = carData.MODEL_NAME,
+                            ORGNAME = carData.ORGNAME,
+                            PINFL = carData.PINFL,
+                            TECH_NUMBER = techNomer,
+                            TECH_PASSPORT_ISSUE_DATE = carData.TECH_PASSPORT_ISSUE_DATE,
+                            TECH_SERIYA = techSeriya,
+                            USE_TERRITORY = carData.USE_TERRITORY,
+                            VEHICLE_TYPE_ID = carData.VEHICLE_TYPE_ID
+                        )
+                        addCarRequestLiveData.value = addCarRequest
+                        listener.onCarDataReceived(addCarRequest)
+                        sharedViewModel.setData(addCarRequest)
+                        Log.d("1234", "pass data: $addCarRequest")
+                    } else {
+                        errorMessageLiveData.value = ApiErrorMessage(response.message)
+                    }
                 }
             } catch (e: HttpException) {
-                errorMessageLiveData.postValue(NetworkFailure(e.message()))
+                withContext(Dispatchers.Main) {
+                    errorMessageLiveData.value = NetworkFailure(e.message())
+                }
             } catch (e: Exception) {
-                errorMessageLiveData.postValue(GenericFailure())
+                Log.d("1234", "exception $e")
+                withContext(Dispatchers.Main) {
+                    errorMessageLiveData.value = GenericFailure()
+                }
             }
         }
     }
+
     fun resetData() {
         carDataLiveData.postValue(null)
     }
