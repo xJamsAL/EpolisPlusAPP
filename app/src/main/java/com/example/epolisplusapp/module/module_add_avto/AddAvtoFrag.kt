@@ -56,7 +56,9 @@ class AddAvtoFrag : Fragment() {
             }
 
             btSbros.setOnClickListener {
-                addAvtoViewModel.resetData()
+                addAvtoViewModel.clearedData()
+                binding.loadLayoutCom.visibility = View.VISIBLE
+                binding.insideContainerCom.visibility = View.GONE
                 clearInputFields()
             }
         }

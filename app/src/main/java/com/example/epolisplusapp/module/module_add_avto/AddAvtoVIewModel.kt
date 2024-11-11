@@ -3,6 +3,7 @@ package com.example.epolisplusapp.module.module_add_avto
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.ListFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -97,6 +98,7 @@ class AddAvtoViewModel(
                         listener.onCarDataReceived(addCarRequest)
                         sharedViewModel.setData(addCarRequest)
                         Log.d("1234", "pass data: $addCarRequest")
+
                     } else {
                         errorMessageLiveData.value = ApiErrorMessage(response.message)
                     }
@@ -114,8 +116,18 @@ class AddAvtoViewModel(
         }
     }
 
-    fun resetData() {
-        carDataLiveData.postValue(null)
+    fun clearedData() {
+        Log.d("1234", "Данные ${addCarRequestLiveData.value}")
+        if (addCarRequestLiveData.value != null){
+            sharedViewModel.clearData()
+            Log.d("1234", "Данные очищены")
+            Log.d("1234", "Данные ${addCarRequestLiveData.value}")
+
+        }else{
+            errorMessageLiveData.value = GenericFailure()
+        }
+
     }
+
 
 }

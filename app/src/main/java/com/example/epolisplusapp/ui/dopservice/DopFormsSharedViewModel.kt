@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 
 class DopFormsSharedViewModel: ViewModel() {
-    private val shareData = MutableLiveData<AddCarRequest>()
+    private val shareData = MutableLiveData<AddCarRequest?>()
 
 
     fun setData(data: AddCarRequest){
@@ -16,6 +16,9 @@ class DopFormsSharedViewModel: ViewModel() {
         Log.d("1234", "Current sharedData value: ${data}")
     }
 
-    fun getData(): LiveData<AddCarRequest> = shareData
+    fun getData(): LiveData<AddCarRequest?> = shareData
+    fun clearData(){
+        shareData.value = null
+    }
 
 }

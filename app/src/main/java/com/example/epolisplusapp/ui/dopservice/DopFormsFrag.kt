@@ -2,12 +2,12 @@ package com.example.epolisplusapp.ui.dopservice
 
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.databinding.DopUslugiOformlenBinding
@@ -41,33 +41,37 @@ class DopFormsFrag : BottomSheetDialogFragment() {
         setupObservers()
         setupButtons()
         setupNavigationButtons()
+
     }
 
 
     private fun setupObservers() {
 
-        dopFormsViewModel.navigateGeneralInfoNext.observe(viewLifecycleOwner) { shouldNavigate ->
-            if (shouldNavigate == true) {
-                Log.d("1234", "asdsad$shouldNavigate")
+        dopFormsViewModel.navigateGeneralInfoNext.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Log.d("1234", "Полученные данные в фрагменте $isSuccess")
                 navigateGeneralInfoNext()
-                dopFormsViewModel.resetNavigation()
             } else {
                 Log.d("1234", "Ошибка в наблюдении за navigateGeneralInfoNext")
             }
         }
 
-        dopFormsViewModel.carDataReceived.observe(viewLifecycleOwner){data ->
-            Log.d("1234", "carDataReceived observe frag = ${data} ")
+        dopFormsViewModel.carDataFromShareidViewModel.observe(viewLifecycleOwner) { data ->
+            Log.d("1234", "carDataReceived observe frag = $data ")
             if (data != null) {
-                Log.d("1234", "poluchilos")
-                dopFormsViewModel.callOnClickBtn()
+                updateUIBtGeneralInfoNext()
+                Log.d("1234", "Успех при получении данных")
             }
+            if (data == null){
+                updateUIBtGeneralInfoNextAfterReset()
+            }
+
         }
 
         dopFormsViewModel.errorLiveData.observe(viewLifecycleOwner) { errorMessage ->
 
             val message = errorMessage.getErrorMessage(requireContext())
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            CommonUtils.showCustomToast(requireContext(), message)
         }
     }
 
@@ -192,7 +196,7 @@ class DopFormsFrag : BottomSheetDialogFragment() {
     private fun navigateGeneralInfoNext() {
         Log.d("1234", "navigateGeneralInfoNext called")
         binding.apply {
-//            dopFormsViewModel.test()
+
             cGeneralInfoLayout.setBackgroundResource(R.drawable.tv_left_rounded)
             ivGeneralInfoIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.grey))
             cClientDataLayout.setBackgroundResource(R.drawable.tv_right_rounded)
@@ -202,8 +206,6 @@ class DopFormsFrag : BottomSheetDialogFragment() {
             ClientDataLayout.visibility = View.VISIBLE
             clientDataContainer.visibility = View.VISIBLE
             phoneContainer.visibility = View.VISIBLE
-
-            Log.d("1234", "model = $dopFormsViewModel")
             ivClientDataIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
             tvClientDataText.setTextColor(
                 ContextCompat.getColor(
@@ -215,7 +217,7 @@ class DopFormsFrag : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("UseCompatTextViewDrawableApis")
-    private fun updateButtonGeneralInfoNext() {
+    private fun updateUIBtGeneralInfoNext() {
         binding.apply {
             btGeneralInformationNext.compoundDrawableTintList =
                 ContextCompat.getColorStateList(requireContext(), R.color.white)
@@ -232,6 +234,29 @@ class DopFormsFrag : BottomSheetDialogFragment() {
         }
     }
 
+    @SuppressLint("UseCompatTextViewDrawableApis")
+    private fun updateUIBtGeneralInfoNextAfterReset() {
+        binding.apply {
+            btGeneralInformationNext.compoundDrawableTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.edit_text_color_disabled)
+            btGeneralInformationNext.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.edit_text_color_disabled
+                )
+            )
+            btGeneralInformationNext.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.edit_disabled_back)
+            btGeneralInformationNext.strokeColor = (
+                    ContextCompat.getColorStateList(requireContext(), R.color.edit_disabled_stroke)
+                    )
+        }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        dopFormsViewModel.clearShareData()
+    }
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()
