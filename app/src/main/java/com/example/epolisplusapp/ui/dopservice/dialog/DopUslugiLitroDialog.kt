@@ -1,4 +1,4 @@
-package com.example.epolisplusapp.ui.dopservice
+package com.example.epolisplusapp.ui.dopservice.dialog
 
 import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Locale
 
-class DopUslugiDialog : BottomSheetDialogFragment() {
+class DopUslugiLitroDialog : BottomSheetDialogFragment() {
     private val baseUrl = "https://epolisplus.uz/"
 
     companion object {
@@ -24,8 +24,8 @@ class DopUslugiDialog : BottomSheetDialogFragment() {
             icon: String,
             price: Int,
             info: String
-        ): DopUslugiDialog {
-            val fragment = DopUslugiDialog()
+        ): DopUslugiLitroDialog {
+            val fragment = DopUslugiLitroDialog()
             val args = Bundle().apply {
                 putString("name", name)
                 putString("icon", icon)
@@ -73,7 +73,7 @@ class DopUslugiDialog : BottomSheetDialogFragment() {
         CommonUtils.setupToolbarDialog(toolbar, this)
         val button  = view.findViewById<Button>(R.id.button2)
         button.setOnClickListener {
-            val bottomSheet = DopFormsFrag()
+            val bottomSheet = DopFormsDialog()
             bottomSheet.show(parentFragmentManager, "myBottomSheet1")
             dismiss()
 

@@ -1,9 +1,11 @@
-package com.example.epolisplusapp.ui.dopservice
+package com.example.epolisplusapp.ui.dopservice.dialog
 
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +16,14 @@ import com.example.epolisplusapp.databinding.DopUslugiOformlenBinding
 import com.example.epolisplusapp.module.module_add_avto.AddAvtoFrag
 import com.example.epolisplusapp.module.module_add_client.AddClientFrag
 import com.example.epolisplusapp.util.CommonUtils
+import com.example.epolisplusapp.util.EditHideKeyboard
+import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DopFormsFrag : BottomSheetDialogFragment() {
+class DopFormsDialog : BottomSheetDialogFragment() {
 
     private lateinit var binding: DopUslugiOformlenBinding
-    private lateinit var dopFormsViewModel: DopFormsViewModel
+    private lateinit var dopFormsDialogViewModel: DopFormsDialogViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,42 +38,76 @@ class DopFormsFrag : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d("1234", "onViewCreated called")
         super.onViewCreated(view, savedInstanceState)
-        CommonUtils.setupToolbarDialog(binding.oformlenToolbar, this)
-        CommonUtils.setupBottomSheetBehavior(view, this)
-        dopFormsViewModel = DopFormsViewModel.create(requireContext())
+        dopFormsDialogViewModel = DopFormsDialogViewModel.create(requireContext())
+
         setupFragments()
         setupObservers()
         setupButtons()
         setupNavigationButtons()
-
+        setupUtils(view)
     }
 
 
-    private fun setupObservers() {
+    private fun setupUtils(view: View) {
+        CommonUtils.setupBottomSheetBehavior(view, this)
+        CommonUtils.setupToolbarDialog(binding.oformlenToolbar, this)
+        CommonUtils.hidekeyboardDialog(this)
+        val textWatcher = object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                dopFormsDialogViewModel.setPhoneText(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
 
-        dopFormsViewModel.navigateGeneralInfoNext.observe(viewLifecycleOwner) { isSuccess ->
+        }
+        binding.apply {
+            edPhoneInput.addTextChangedListener(EditHideKeyboard(edPhoneInput))
+            edPhoneInput.addTextChangedListener(
+                PhoneNumberMaskWatcher(" (##) ###-##-##", edPhoneInput)
+            )
+            edPhoneInput.addTextChangedListener(textWatcher)
+        }
+    }
+
+    private fun setupObservers() {
+        dopFormsDialogViewModel.navigateBoolean.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
-                Log.d("1234", "Полученные данные в фрагменте $isSuccess")
                 navigateGeneralInfoNext()
-            } else {
-                Log.d("1234", "Ошибка в наблюдении за navigateGeneralInfoNext")
             }
         }
 
-        dopFormsViewModel.carDataFromShareidViewModel.observe(viewLifecycleOwner) { data ->
-            Log.d("1234", "carDataReceived observe frag = $data ")
+        dopFormsDialogViewModel.isButtonEnabled.observe(viewLifecycleOwner){ isEnabled ->
+            if (isEnabled){
+                updateUIBtClientDataNext()
+            }
+            else{
+                updateUIBtClientDataAfterReset()
+            }
+        }
+        dopFormsDialogViewModel.carDataFromShareidViewModel.observe(viewLifecycleOwner) { data ->
             if (data != null) {
                 updateUIBtGeneralInfoNext()
-                Log.d("1234", "Успех при получении данных")
             }
-            if (data == null){
+            if (data == null) {
                 updateUIBtGeneralInfoNextAfterReset()
             }
-
         }
-
-        dopFormsViewModel.errorLiveData.observe(viewLifecycleOwner) { errorMessage ->
-
+//        dopFormsViewModel.clientDataFromSharedViewModel.observe(viewLifecycleOwner) { data ->
+//            if (data != null) {
+//                updateUIBtClientDataNext()
+//            }
+//            if (data == null) {
+//                updateUIBtClientDataAfterReset()
+//            }
+//        }
+        dopFormsDialogViewModel.clientBoolean.observe(viewLifecycleOwner) { isSucces ->
+            if (isSucces) {
+                navigateClientDataNext()
+            }
+        }
+        dopFormsDialogViewModel.errorLiveData.observe(viewLifecycleOwner) { errorMessage ->
             val message = errorMessage.getErrorMessage(requireContext())
             CommonUtils.showCustomToast(requireContext(), message)
         }
@@ -91,16 +129,23 @@ class DopFormsFrag : BottomSheetDialogFragment() {
     private fun setupButtons() {
         binding.apply {
             btGeneralInformationNext.setOnClickListener {
-                dopFormsViewModel.callOnClickBtn()
+                dopFormsDialogViewModel.callOnClickBtn()
+                navigateGeneralInfoNext()
+            }
+            btClientDataBack.setOnClickListener {
+                navigateClientDataBack()
             }
             setupNavigationButtons()
+            btClientDataNext.setOnClickListener {
+                dopFormsDialogViewModel.validateAndInput(binding.edPhoneInput.text.toString().trim())
+            }
+
         }
     }
 
     private fun setupNavigationButtons() {
         binding.apply {
-            btClientDataBack.setOnClickListener { navigateClientDataBack() }
-            btClientDataNext.setOnClickListener { navigateClientDataNext() }
+//            btClientDataNext.setOnClickListener { navigateClientDataNext() }
             btContractInfoBack.setOnClickListener { navigateContractInfoBack() }
             btContractInfoNext.setOnClickListener { navigateContractInfoNext() }
         }
@@ -133,6 +178,7 @@ class DopFormsFrag : BottomSheetDialogFragment() {
 
     private fun navigateClientDataNext() {
         binding.apply {
+
             cClientDataLayout.setBackgroundResource(R.drawable.tv_not_rounded)
             ivClientDataIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.grey))
             cContractInfoLayout.setBackgroundResource(R.drawable.tv_right_rounded)
@@ -194,7 +240,6 @@ class DopFormsFrag : BottomSheetDialogFragment() {
     }
 
     private fun navigateGeneralInfoNext() {
-        Log.d("1234", "navigateGeneralInfoNext called")
         binding.apply {
 
             cGeneralInfoLayout.setBackgroundResource(R.drawable.tv_left_rounded)
@@ -216,56 +261,43 @@ class DopFormsFrag : BottomSheetDialogFragment() {
         }
     }
 
-    @SuppressLint("UseCompatTextViewDrawableApis")
+
     private fun updateUIBtGeneralInfoNext() {
-        binding.apply {
-            btGeneralInformationNext.compoundDrawableTintList =
-                ContextCompat.getColorStateList(requireContext(), R.color.white)
-            btGeneralInformationNext.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.white
-                )
-            )
-            btGeneralInformationNext.backgroundTintList =
-                ContextCompat.getColorStateList(requireContext(), R.color.green)
-            btGeneralInformationNext.strokeColor =
-                ContextCompat.getColorStateList(requireContext(), R.color.green)
-        }
+        CommonUtils.updateButtonStyle(
+            requireContext(),
+            binding.btGeneralInformationNext,
+            CommonUtils.ButtonStyle.ENABLED
+        )
     }
 
-    @SuppressLint("UseCompatTextViewDrawableApis")
     private fun updateUIBtGeneralInfoNextAfterReset() {
-        binding.apply {
-            btGeneralInformationNext.compoundDrawableTintList =
-                ContextCompat.getColorStateList(requireContext(), R.color.edit_text_color_disabled)
-            btGeneralInformationNext.setTextColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.edit_text_color_disabled
-                )
-            )
-            btGeneralInformationNext.backgroundTintList =
-                ContextCompat.getColorStateList(requireContext(), R.color.edit_disabled_back)
-            btGeneralInformationNext.strokeColor = (
-                    ContextCompat.getColorStateList(requireContext(), R.color.edit_disabled_stroke)
-                    )
-        }
+        CommonUtils.updateButtonStyle(
+            requireContext(),
+            binding.btGeneralInformationNext,
+            CommonUtils.ButtonStyle.DISABLED
+        )
+    }
+
+    private fun updateUIBtClientDataNext() {
+        CommonUtils.updateButtonStyle(
+            requireContext(),
+            binding.btClientDataNext,
+            CommonUtils.ButtonStyle.ENABLED
+        )
+    }
+
+    private fun updateUIBtClientDataAfterReset() {
+
+        CommonUtils.updateButtonStyle(
+            requireContext(),
+            binding.btClientDataNext,
+            CommonUtils.ButtonStyle.DISABLED
+        )
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        dopFormsViewModel.clearShareData()
+        dopFormsDialogViewModel.clearShareData()
     }
-
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        dopFormsViewModel.carInfoLiveData.removeObservers(viewLifecycleOwner)
-//        dopFormsViewModel.successLiveData.removeObservers(viewLifecycleOwner)
-//        dopFormsViewModel.errorLiveData.removeObservers(viewLifecycleOwner)
-//        dopFormsViewModel.carData.removeObservers(viewLifecycleOwner)
-//        binding.rcDopForms.adapter = null
-//
-//    }
 
 }

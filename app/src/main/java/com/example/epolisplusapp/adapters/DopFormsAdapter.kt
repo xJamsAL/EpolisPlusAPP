@@ -24,7 +24,7 @@ class DopFormsAdapter(
             itemView.setOnClickListener {
                 selectedItem = cardList[adapterPosition]
                 notifyDataSetChanged()
-                onItemSelected(selectedItem!!) // Вызываем функцию с выбранным элементом
+                onItemSelected(selectedItem!!)
             }
         }
     }

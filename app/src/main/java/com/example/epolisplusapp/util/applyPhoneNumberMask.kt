@@ -1,7 +1,5 @@
 package com.example.epolisplusapp.util
 
-import android.widget.TextView
-
 fun applyPhoneNumberMask(phoneNumber: String, mask: String): String {
 
     val prefix = "+"

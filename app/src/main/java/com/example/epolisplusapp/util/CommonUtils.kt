@@ -1,5 +1,6 @@
 package com.example.epolisplusapp.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -13,17 +14,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.epolisplusapp.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.button.MaterialButton
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 import java.text.NumberFormat
@@ -31,7 +33,40 @@ import java.util.Locale
 
 object CommonUtils {
 
+    enum class ButtonStyle {
+        ENABLED,
+        DISABLED
+    }
 
+    @SuppressLint("UseCompatTextViewDrawableApis")
+    fun updateButtonStyle(context: Context, button: MaterialButton, style: ButtonStyle) {
+        when (style) {
+            ButtonStyle.ENABLED -> {
+                button.apply {
+                    compoundDrawableTintList =
+                        ContextCompat.getColorStateList(context, R.color.white)
+                    setTextColor(ContextCompat.getColor(context, R.color.white))
+                    backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.green)
+                    strokeColor =
+                        ContextCompat.getColorStateList(context, R.color.green)
+                }
+            }
+            ButtonStyle.DISABLED -> {
+                button.apply {
+                    compoundDrawableTintList =
+                        ContextCompat.getColorStateList(context, R.color.edit_text_color_disabled)
+                    setTextColor(ContextCompat.getColor(context, R.color.edit_text_color_disabled))
+                    backgroundTintList =
+                        ContextCompat.getColorStateList(context, R.color.edit_disabled_back)
+                    strokeColor =
+                        ContextCompat.getColorStateList(context, R.color.edit_disabled_stroke)
+                }
+            }
+        }
+    }
+
+    @SuppressLint("InflateParams")
     fun showCustomToast(context: Context, message: String) {
         val inflater = LayoutInflater.from(context)
         val layout = inflater.inflate(R.layout.custom_toast, null)
@@ -42,7 +77,7 @@ object CommonUtils {
         val toast = Toast(context)
         toast.duration = Toast.LENGTH_LONG
         toast.view = layout
-        toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 1000)
+        toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 10000)
         toast.show()
     }
     fun setupToolbar(toolbar: Toolbar, activity: AppCompatActivity) {
@@ -319,6 +354,7 @@ object CommonUtils {
             .setBlurRadius(radius)
 
     }
+    @SuppressLint("ClickableViewAccessibility")
     fun setupBlurViewForFragment(fragment: Fragment, blurView: BlurView) {
         val radius = 5f
         val context = fragment.requireContext()
@@ -343,6 +379,13 @@ object CommonUtils {
         val currentFocusView = fragment.view?.rootView ?: return
         inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
+
+    fun hidekeyboardDialog(dialog: BottomSheetDialogFragment?){
+        val inputMethodManager = dialog?.requireContext()?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusView = dialog?.view?.rootView ?: return
+        inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
 
 
 
@@ -384,6 +427,40 @@ object CommonUtils {
         val formattedSum = formatter.format(total)
         val currency = context.getString(currencyResId)
         return "$formattedSum $currency"
+    }
+
+    fun EditText.addDateMask(){
+        this.addTextChangedListener(object : TextWatcher{
+            private var isUpdating = false
+            private val dateFormat = "dd.mm.yyyy"
+            private val divider = "."
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+               if (isUpdating) return
+                isUpdating = true
+                val input = s.toString().replace(divider.toString(),"")
+                val formatted = StringBuilder()
+
+                for (i in input.indices){
+                    formatted.append(input[i])
+                    if (( i == 1 || i == 3)&& i != input.length - 1 ){
+                        formatted.append(divider)
+                    }
+                }
+                this@addDateMask.setText(formatted.toString())
+                this@addDateMask.setSelection(formatted.length)
+                isUpdating = false
+            }
+
+        })
     }
 
 

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.epolisplusapp.R
 import com.example.epolisplusapp.databinding.MainFragmentBinding
 import com.example.epolisplusapp.models.profile.SharedViewModel
-import com.example.epolisplusapp.ui.dopservice.DopUslugiActivity
+import com.example.epolisplusapp.ui.dopservice.activity.DopUslugiActivity
 import com.example.epolisplusapp.ui.settings.SettingsActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.badge.BadgeDrawable

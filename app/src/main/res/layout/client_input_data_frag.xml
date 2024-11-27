@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_back">
 
     <TextView
         android:id="@+id/textView66"
@@ -11,20 +12,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="20sp"
-        android:textColor="@color/black_text_color"
         android:text="@string/dop_dialog_tv_clients_data"
+        android:textColor="@color/black_text_color"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView80"
-        android:textColor="@color/grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/dop_uslugi_tv_date_birth"
+        android:textColor="@color/grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
@@ -41,18 +42,19 @@
         app:layout_constraintTop_toTopOf="@+id/textView80" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/dataInputEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/auth_input_border"
+        android:background="@drawable/edittext_background"
         android:drawableEnd="@drawable/top_bottom_arrow"
-        android:elevation="2dp"
+        android:elevation="1dp"
         android:ems="10"
         android:hint="@string/dd.mm.yyyy"
         android:inputType="date"
+        android:maxLength="10"
         android:paddingStart="40dp"
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +71,7 @@
         android:text="@string/dop_uslugi_tv_passeport_and_seriya"
         android:textColor="@color/grey"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintTop_toBottomOf="@+id/dataInputEditText" />
 
     <TextView
         android:id="@+id/textView91"
@@ -84,23 +86,23 @@
         app:layout_constraintTop_toTopOf="@+id/textView89" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/seriyaPassportInputEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/auth_input_border"
-        android:elevation="2dp"
+        android:autofillHints=""
+        android:background="@drawable/edittext_background"
+        android:elevation="1dp"
         android:ems="10"
         android:gravity="center"
         android:hint="AA"
-        android:inputType="text"
+        android:inputType="text|textCapCharacters"
         android:maxLength="2"
         app:layout_constraintEnd_toStartOf="@+id/guideline16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView89"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/textView89" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"
@@ -110,26 +112,27 @@
         app:layout_constraintGuide_percent="0.35" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/nomerPassportInputEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/auth_input_border"
-        android:elevation="2dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="1dp"
         android:ems="10"
         android:hint="@string/_000000000"
-        android:inputType="text"
+        android:inputType="number"
+        android:maxLength="7"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextText7"
+        app:layout_constraintBottom_toBottomOf="@+id/seriyaPassportInputEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
-        app:layout_constraintTop_toTopOf="@+id/editTextText7"
+        app:layout_constraintTop_toTopOf="@+id/seriyaPassportInputEditText"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loadDataBt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -144,7 +147,7 @@
         app:iconTint="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7"
+        app:layout_constraintTop_toBottomOf="@+id/seriyaPassportInputEditText"
         app:strokeColor="@color/light_dark_green"
         app:strokeWidth="1dp" />
 
@@ -154,9 +157,99 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:translationZ="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextText6"
-        app:layout_constraintStart_toStartOf="@+id/editTextText6"
-        app:layout_constraintTop_toTopOf="@+id/editTextText6"
+        app:layout_constraintBottom_toBottomOf="@+id/dataInputEditText"
+        app:layout_constraintStart_toStartOf="@+id/dataInputEditText"
+        app:layout_constraintTop_toTopOf="@+id/dataInputEditText"
         app:srcCompat="@drawable/calendar" />
 
+    <LinearLayout
+        android:id="@+id/fullInfoContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomerPassportInputEditText"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/tv_FIO"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/auth_input_border_disabled"
+            android:breakStrategy="simple"
+            android:elevation="1dp"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:minHeight="40dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/light_grey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView70"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/tv_PINFL"
+            android:textColor="@color/grey" />
+
+        <EditText
+            android:id="@+id/edPINFL"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/auth_input_border_disabled"
+            android:elevation="1dp"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/light_grey"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/addClientSbrosBt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/light_red"
+            android:text="@string/bt_sbros"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/cabinet_dialog_sheet_x"
+            app:iconGravity="textStart"
+            app:iconTint="@color/red"
+            app:strokeColor="@color/stroke_light_red"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

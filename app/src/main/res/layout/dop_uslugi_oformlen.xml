@@ -587,7 +587,7 @@
                     app:layout_constraintStart_toEndOf="@+id/textView71" />
 
                 <EditText
-                    android:id="@+id/editTextText3"
+                    android:id="@+id/edPhoneInput"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
@@ -786,9 +786,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btClientDataBack"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -809,7 +810,7 @@
                     app:strokeColor="@color/edit_disabled_stroke"
                     app:strokeWidth="1dp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btClientDataNext"
                     android:layout_width="0dp"
                     android:layout_height="50dp"

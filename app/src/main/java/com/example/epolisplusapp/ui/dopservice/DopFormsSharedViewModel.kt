@@ -4,21 +4,31 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.epolisplusapp.models.TestDataClass
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 
-class DopFormsSharedViewModel: ViewModel() {
-    private val shareData = MutableLiveData<AddCarRequest?>()
+class DopFormsSharedViewModel : ViewModel() {
+    private val addAvtoData = MutableLiveData<AddCarRequest?>()
+    private val addClientData = MutableLiveData<TestDataClass?>()
 
 
-    fun setData(data: AddCarRequest){
-        Log.d("1234", "Updating data in SharedViewModel with: ${shareData.value}")
-        shareData.value = data
-        Log.d("1234", "Current sharedData value: ${data}")
+    fun setAddAvtoData(data: AddCarRequest) {
+        addAvtoData.value = data
     }
 
-    fun getData(): LiveData<AddCarRequest?> = shareData
-    fun clearData(){
-        shareData.value = null
+    fun setAddClientData(data : TestDataClass) {
+        addClientData.value = data
+    }
+
+    fun getAddAvtoData(): LiveData<AddCarRequest?> = addAvtoData
+    fun getAddClientData(): LiveData<TestDataClass?> = addClientData
+
+    fun clearAvtoData() {
+        addAvtoData.value = null
+    }
+
+    fun clearClientData() {
+        addClientData.value = null
     }
 
 }

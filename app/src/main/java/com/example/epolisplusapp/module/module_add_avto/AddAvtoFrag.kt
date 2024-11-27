@@ -12,7 +12,7 @@ import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
 import com.example.epolisplusapp.models.error_models.ApiErrorMessage
 import com.example.epolisplusapp.models.error_models.GenericFailure
 import com.example.epolisplusapp.models.error_models.NetworkFailure
-import com.example.epolisplusapp.ui.dopservice.DopFormsViewModel
+import com.example.epolisplusapp.ui.dopservice.dialog.DopFormsDialogViewModel
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
@@ -20,7 +20,7 @@ import com.example.epolisplusapp.util.EditSpaces
 class AddAvtoFrag : Fragment() {
 
     private lateinit var addAvtoViewModel: AddAvtoViewModel
-    private lateinit var dopFormsViewModel: DopFormsViewModel
+    private lateinit var dopFormsDialogViewModel: DopFormsDialogViewModel
 
     private var _binding: AvtoNomerBinding? = null
     private val binding get() = _binding!!
@@ -39,18 +39,16 @@ class AddAvtoFrag : Fragment() {
         val carNomer: EditText = view.findViewById(R.id.edAvtoNomer)
         carNomer.addTextChangedListener(EditSpaces(carNomer))
         binding.edTechNomerCom.addTextChangedListener(EditHideKeyboard(binding.edTechNomerCom))
-        dopFormsViewModel = DopFormsViewModel.create(requireContext())
-        addAvtoViewModel = AddAvtoViewModel.create(requireContext(), dopFormsViewModel)
+        dopFormsDialogViewModel = DopFormsDialogViewModel.create(requireContext())
+        addAvtoViewModel = AddAvtoViewModel.create(requireContext(), dopFormsDialogViewModel)
         setupEditTexts()
         setupObservers()
-
         binding.apply {
             btLoadDataCom.setOnClickListener {
                 val techSeriya = edTechSeriyaCom.text.toString().trim()
                 val techNomer = edTechNomerCom.text.toString().trim()
                 val avtoRegion = edRegion.text.toString().trim()
                 val avtoNomer = edAvtoNomer.text.toString().trim()
-
                 addAvtoViewModel.sendCarData(techSeriya, techNomer, avtoRegion, avtoNomer)
                 loadLayoutCom.visibility = View.VISIBLE
             }

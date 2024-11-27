@@ -157,7 +157,7 @@
     <string name="dop_dialog_bt_add_car">Добавить другой автомобиль</string>
     <string name="dop_diaolog_bt_next">Продолжить</string>
     <string name="dop_dialog_tv_about_car">Информация об автомобиле</string>
-    <string name="dop_dialog_bt_sbros">Сбросить</string>
+    <string name="bt_sbros">Сбросить</string>
     <string name="dop_dialog_checbox">Сохранить данные об этом автомобиле</string>
     <string name="dop_dialog_tv_clients_data">Данные клиента</string>
     <string name="dop_uslugi_tv_date_birth">Дата рождения</string>
@@ -166,8 +166,8 @@
     <string name="_000000000">000000000</string>
     <string name="aaf">AAF</string>
     <string name="dd.mm.yyyy">дд.мм.гггг</string>
-    <string name="dop_dialog_full_name">ФИО</string>
-    <string name="dop_dialog_pinfl">ПИНФЛ</string>
+    <string name="tv_FIO">ФИО</string>
+    <string name="tv_PINFL">ПИНФЛ</string>
     <string name="dop_dialog_tv_confirm_info">Подтверждение информации</string>
     <string name="dop_uslugi_tv_price_layout_subtitle">Подписка оформляется на следующие услуги</string>
     <string name="dop_uslugi_checkBox_part_1">Ознакомлен(а) и согласен(а) с</string>

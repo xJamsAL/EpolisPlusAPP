@@ -15,10 +15,14 @@
         android:theme="@style/Theme.EpolisPlusApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.dopservice.DopUslugiActivity"
-            android:exported="false"
-            android:label=""
-            />
+            android:name=".ui.dopservice.activity.DopUslugiActivity"
+            android:exported="true"
+            android:label="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.settings.SettingNotifycationActivity"
             android:exported="false" />
@@ -29,11 +33,7 @@
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.EpolisPlusApp.Auth">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.auth.AuthForgotCodePass"

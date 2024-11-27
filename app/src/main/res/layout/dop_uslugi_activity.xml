@@ -97,7 +97,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.dopservice.DopUslugiActivity">
+            tools:context=".ui.dopservice.activity.DopUslugiActivity">
 
             <LinearLayout
                 android:layout_width="0dp"

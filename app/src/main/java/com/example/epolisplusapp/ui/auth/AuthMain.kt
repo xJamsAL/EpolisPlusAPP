@@ -11,7 +11,9 @@ import com.example.epolisplusapp.databinding.AuthActivityMainBinding
 import com.example.epolisplusapp.models.auth.request.CheckPhoneRequest
 import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AuthMain : AppCompatActivity() {
     private lateinit var retrofitInstance: RetrofitInstance
@@ -49,27 +51,27 @@ class AuthMain : AppCompatActivity() {
             try {
                 CommonUtils.hideKeyboard(this@AuthMain)
                 binding.progressBarBack.visibility = View.VISIBLE
-                val formattedPhoneNumber = CommonUtils.formatPhoneNumber(phoneNumber)
-                val response =
-                    retrofitInstance.api.checkPhone(CheckPhoneRequest(formattedPhoneNumber))
-                binding.progressBarBack.visibility = View.GONE
 
-                if (response.response) {
-                    val intent = Intent(this@AuthMain, AuthLogin::class.java).apply {
-                        putExtra("number1", phoneNumber)
-                    }
-                    startActivity(intent)
-                } else {
-                    val intent = Intent(this@AuthMain, AuthRegister::class.java).apply {
-                        putExtra("number1", phoneNumber)
-                    }
-                    startActivity(intent)
+                val formattedPhoneNumber = CommonUtils.formatPhoneNumber(phoneNumber)
+                val response = withContext(Dispatchers.IO) {
+                    retrofitInstance.api.checkPhone(CheckPhoneRequest(formattedPhoneNumber))
                 }
+                binding.progressBarBack.visibility = View.GONE
+                val intent = Intent(
+                    this@AuthMain,
+                    if (response.response) AuthLogin::class.java else AuthRegister::class.java
+                ).apply {
+                    putExtra("number1", phoneNumber)
+                }
+                startActivity(intent)
+
             } catch (e: Exception) {
+                e.printStackTrace()
                 Toast.makeText(this@AuthMain, "Ошибка проверки номера", Toast.LENGTH_SHORT).show()
                 binding.progressBarBack.visibility = View.GONE
             }
         }
     }
+
 }
 

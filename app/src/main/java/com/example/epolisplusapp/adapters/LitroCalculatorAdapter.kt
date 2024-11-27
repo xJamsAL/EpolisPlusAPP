@@ -26,7 +26,6 @@ class LitroCalculatorAdapter(
     private val onItemClick: (LitroCalculatorItems) -> Unit
 ) : RecyclerView.Adapter<LitroCalculatorAdapter.DopUslugiViewHolder>() {
 
-
     private val baseUrl = "https://epolisplus.uz/"
     private val selectedItems = mutableSetOf<Int>()
     private var totalSum = 0

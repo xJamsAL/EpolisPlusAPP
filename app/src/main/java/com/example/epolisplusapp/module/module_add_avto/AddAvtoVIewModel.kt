@@ -3,7 +3,6 @@ package com.example.epolisplusapp.module.module_add_avto
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.ListFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +16,9 @@ import com.example.epolisplusapp.models.cabinet.response.AddUserCarResponse
 import com.example.epolisplusapp.models.error_models.ApiErrorMessage
 import com.example.epolisplusapp.models.error_models.Failure
 import com.example.epolisplusapp.models.error_models.GenericFailure
+import com.example.epolisplusapp.models.error_models.InputEditTextFailure
 import com.example.epolisplusapp.models.error_models.NetworkFailure
 import com.example.epolisplusapp.models.error_models.TokenFailure
-import com.example.epolisplusapp.models.profile.SharedViewModel
 import com.example.epolisplusapp.service.PreferenceService
 import com.example.epolisplusapp.service.RetrofitInstance
 import com.example.epolisplusapp.ui.dopservice.DopFormsSharedViewModel
@@ -96,12 +95,15 @@ class AddAvtoViewModel(
                         )
                         addCarRequestLiveData.value = addCarRequest
                         listener.onCarDataReceived(addCarRequest)
-                        sharedViewModel.setData(addCarRequest)
+                        sharedViewModel.setAddAvtoData(addCarRequest)
                         Log.d("1234", "pass data: $addCarRequest")
 
-                    } else {
+                    }
+                    else {
                         errorMessageLiveData.value = ApiErrorMessage(response.message)
                     }
+
+
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
@@ -118,12 +120,12 @@ class AddAvtoViewModel(
 
     fun clearedData() {
         Log.d("1234", "Данные ${addCarRequestLiveData.value}")
-        if (addCarRequestLiveData.value != null){
-            sharedViewModel.clearData()
+        if (addCarRequestLiveData.value != null) {
+            sharedViewModel.clearAvtoData()
             Log.d("1234", "Данные очищены")
             Log.d("1234", "Данные ${addCarRequestLiveData.value}")
 
-        }else{
+        } else {
             errorMessageLiveData.value = GenericFailure()
         }
 
