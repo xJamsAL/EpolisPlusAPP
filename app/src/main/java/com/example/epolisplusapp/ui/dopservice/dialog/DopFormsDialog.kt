@@ -11,19 +11,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.epolisplusapp.R
+import com.example.epolisplusapp.adapters.DopFormsLitroAdapter
 import com.example.epolisplusapp.databinding.DopUslugiOformlenBinding
-import com.example.epolisplusapp.module.module_add_avto.AddAvtoFrag
+import com.example.epolisplusapp.module.module_add_avto.AddAvtoFragment
 import com.example.epolisplusapp.module.module_add_client.AddClientFrag
 import com.example.epolisplusapp.util.CommonUtils
-import com.example.epolisplusapp.util.EditHideKeyboard
+import com.example.epolisplusapp.util.EditHideKeyboardForPhoneInput
 import com.example.epolisplusapp.util.PhoneNumberMaskWatcher
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DopFormsDialog : BottomSheetDialogFragment() {
 
     private lateinit var binding: DopUslugiOformlenBinding
+    private lateinit var dopFormsAdapter: DopFormsLitroAdapter
     private lateinit var dopFormsDialogViewModel: DopFormsDialogViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +43,11 @@ class DopFormsDialog : BottomSheetDialogFragment() {
         Log.d("1234", "onViewCreated called")
         super.onViewCreated(view, savedInstanceState)
         dopFormsDialogViewModel = DopFormsDialogViewModel.create(requireContext())
+        binding.rcLitroResult.layoutManager = LinearLayoutManager(requireContext())
+        dopFormsAdapter = DopFormsLitroAdapter(emptyList(), requireContext())
+        binding.rcLitroResult.adapter = dopFormsAdapter
+
+
 
         setupFragments()
         setupObservers()
@@ -52,18 +61,22 @@ class DopFormsDialog : BottomSheetDialogFragment() {
         CommonUtils.setupBottomSheetBehavior(view, this)
         CommonUtils.setupToolbarDialog(binding.oformlenToolbar, this)
         CommonUtils.hidekeyboardDialog(this)
-        val textWatcher = object : TextWatcher{
+
+        val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 dopFormsDialogViewModel.setPhoneText(s.toString())
             }
+
             override fun afterTextChanged(s: Editable?) {
             }
 
         }
         binding.apply {
-            edPhoneInput.addTextChangedListener(EditHideKeyboard(edPhoneInput))
+
+            edPhoneInput.addTextChangedListener(EditHideKeyboardForPhoneInput(edPhoneInput))
             edPhoneInput.addTextChangedListener(
                 PhoneNumberMaskWatcher(" (##) ###-##-##", edPhoneInput)
             )
@@ -72,17 +85,31 @@ class DopFormsDialog : BottomSheetDialogFragment() {
     }
 
     private fun setupObservers() {
+        dopFormsDialogViewModel.discount.observe(viewLifecycleOwner) { discountData ->
+            val formatted =
+                CommonUtils.formatSumWithSeparatorAndCurrency(discountData, requireContext())
+            binding.tvContractInfoDiscountPrice.text = formatted
+        }
+        dopFormsDialogViewModel.discountPercentData.observe(viewLifecycleOwner) { percent ->
+            binding.tvContractInfoDiscount.text = percent.toString()
+        }
+        dopFormsDialogViewModel.finalTotal.observe(viewLifecycleOwner) { finalTotal ->
+
+            val formatted =
+                CommonUtils.formatSumWithSeparatorAndCurrency(finalTotal, requireContext())
+            binding.tvFinalSum.text = formatted
+            binding.tvPaymeFinalSum.text = formatted
+        }
         dopFormsDialogViewModel.navigateBoolean.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
                 navigateGeneralInfoNext()
             }
         }
 
-        dopFormsDialogViewModel.isButtonEnabled.observe(viewLifecycleOwner){ isEnabled ->
-            if (isEnabled){
+        dopFormsDialogViewModel.isButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            if (isEnabled) {
                 updateUIBtClientDataNext()
-            }
-            else{
+            } else {
                 updateUIBtClientDataAfterReset()
             }
         }
@@ -94,14 +121,11 @@ class DopFormsDialog : BottomSheetDialogFragment() {
                 updateUIBtGeneralInfoNextAfterReset()
             }
         }
-//        dopFormsViewModel.clientDataFromSharedViewModel.observe(viewLifecycleOwner) { data ->
-//            if (data != null) {
-//                updateUIBtClientDataNext()
-//            }
-//            if (data == null) {
-//                updateUIBtClientDataAfterReset()
-//            }
-//        }
+        dopFormsDialogViewModel.recycleSelectedItems.observe(viewLifecycleOwner) { data ->
+            Log.d("adapter", "Received data in dialog: $data")
+            dopFormsAdapter.updateData(data)
+            Log.d("adapter", "Adapter updated with selected items.")
+        }
         dopFormsDialogViewModel.clientBoolean.observe(viewLifecycleOwner) { isSucces ->
             if (isSucces) {
                 navigateClientDataNext()
@@ -120,7 +144,7 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             .replace(R.id.clientDataContainer, clientContainer)
             .commit()
 
-        val addAvtoFragment = AddAvtoFrag()
+        val addAvtoFragment = AddAvtoFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.frag1, addAvtoFragment)
             .commit()
@@ -137,7 +161,9 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             }
             setupNavigationButtons()
             btClientDataNext.setOnClickListener {
-                dopFormsDialogViewModel.validateAndInput(binding.edPhoneInput.text.toString().trim())
+                dopFormsDialogViewModel.validateAndInput(
+                    binding.edPhoneInput.text.toString().trim()
+                )
             }
 
         }
@@ -166,7 +192,7 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             frag1.visibility = View.VISIBLE
 
 
-            ClientDataLayout.visibility = View.GONE
+            clientDataButtonLayout.visibility = View.GONE
             clientDataContainer.visibility = View.GONE
             phoneContainer.visibility = View.GONE
 
@@ -192,7 +218,7 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             confirmLayout.visibility = View.VISIBLE
             discountLayout.visibility = View.VISIBLE
             contractInfoLayout.visibility = View.VISIBLE
-            ClientDataLayout.visibility = View.GONE
+            clientDataButtonLayout.visibility = View.GONE
             clientDataContainer.visibility = View.GONE
             phoneContainer.visibility = View.GONE
         }
@@ -214,7 +240,7 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             confirmLayout.visibility = View.GONE
             discountLayout.visibility = View.GONE
             contractInfoLayout.visibility = View.GONE
-            ClientDataLayout.visibility = View.VISIBLE
+            clientDataButtonLayout.visibility = View.VISIBLE
             clientDataContainer.visibility = View.VISIBLE
             phoneContainer.visibility = View.VISIBLE
         }
@@ -248,7 +274,7 @@ class DopFormsDialog : BottomSheetDialogFragment() {
             btGeneralInformationNext.visibility = View.GONE
             CarListContainer.visibility = View.GONE
             frag1.visibility = View.GONE
-            ClientDataLayout.visibility = View.VISIBLE
+            clientDataButtonLayout.visibility = View.VISIBLE
             clientDataContainer.visibility = View.VISIBLE
             phoneContainer.visibility = View.VISIBLE
             ivClientDataIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))

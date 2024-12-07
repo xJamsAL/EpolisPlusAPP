@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.epolisplusapp.api.MainApi
-import com.example.epolisplusapp.interfaces.ICarDataListener
 import com.example.epolisplusapp.models.TestDataClass
 import com.example.epolisplusapp.models.cabinet.request.AddCarRequest
+import com.example.epolisplusapp.models.dopuslugi.LitroCalculatorItems
 import com.example.epolisplusapp.models.error_models.Failure
 import com.example.epolisplusapp.models.error_models.InputEditTextFailure
 import com.example.epolisplusapp.service.PreferenceService
@@ -22,7 +22,7 @@ class DopFormsDialogViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
     private val sharedViewModel: DopFormsSharedViewModel
-) : ViewModel(), ICarDataListener {
+) : ViewModel(){
 
     val errorLiveData = MutableLiveData<Failure>()
 
@@ -33,25 +33,21 @@ class DopFormsDialogViewModel(
 
     val carDataFromShareidViewModel: LiveData<AddCarRequest?> = sharedViewModel.getAddAvtoData()
     val clientDataFromSharedViewModel: LiveData<TestDataClass?> = sharedViewModel.getAddClientData()
+    val recycleSelectedItems : LiveData<List<LitroCalculatorItems>> = sharedViewModel.getRecycleItems()
+    val discount : LiveData<Int> = sharedViewModel.getDiscountPrice()
+    val finalTotal: LiveData<Int> = sharedViewModel.getFinalTotal()
+    val discountPercentData: LiveData<String> = sharedViewModel.getDiscountData()
     private val _phoneText = MutableLiveData<String>()
+
     val phoneText: LiveData<String> get() = _phoneText
     private val _isButtonEnabled = MediatorLiveData<Boolean>().apply {
-        addSource(_phoneText) { updateButtonState() } // Проверка при изменении EditText
-        addSource(carDataFromShareidViewModel) { updateButtonState() } // Проверка при получении данных
+        addSource(_phoneText) { updateButtonState() }
+        addSource(carDataFromShareidViewModel) { updateButtonState() }
     }
     val isButtonEnabled: LiveData<Boolean> get() = _isButtonEnabled
 
 
-    override fun onCarDataReceived(addCarRequest: AddCarRequest) {
-//        this.carData = addCarRequest
-////        _carDataReceived.postValue(addCarRequest)
-//        //  _carDataReceived.value = addCarRequest
-//        _carDataReceived.postValue(addCarRequest)
-//
-//        Log.d("1234", "Data received in DopFormsViewModel: $carData")
-//        Log.d("1234", "Data received in DopFormsViewModel: ${_carDataReceived.value}")
-//        observeCarData()
-    }
+
     fun setPhoneText(phone: String) {
         _phoneText.value = phone
     }
@@ -73,17 +69,20 @@ class DopFormsDialogViewModel(
     }
 
     fun validateAndInput(inputPhone: String) {
-        if (clientDataFromSharedViewModel.value != null && inputPhone.isEmpty()) {
+        if (clientDataFromSharedViewModel.value != null && (inputPhone.isEmpty() || inputPhone.length < 20)) {
             errorLiveData.value = InputEditTextFailure()
             _clientBoolean.value = false
-        } else if (clientDataFromSharedViewModel.value == null && inputPhone.isNotEmpty()) {
+            Log.d("error", "1")
+        } else if (clientDataFromSharedViewModel.value == null &&  inputPhone.length == 20) {
+            Log.d("error", "2")
             errorLiveData.value = InputEditTextFailure()
             _clientBoolean.value = false
-        } else if (clientDataFromSharedViewModel.value == null && inputPhone.isEmpty()) {
+        } else if (clientDataFromSharedViewModel.value == null && (inputPhone.isEmpty() || inputPhone.length < 20)) {
             errorLiveData.value = InputEditTextFailure()
             _clientBoolean.value = false
+            Log.d("error", "3")
         }
-        if (clientDataFromSharedViewModel.value != null && inputPhone.isNotEmpty()) {
+        if (clientDataFromSharedViewModel.value != null && (inputPhone.length == 20)) {
             _clientBoolean.value = true
         }
     }

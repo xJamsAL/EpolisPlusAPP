@@ -237,7 +237,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider15">
+        app:layout_constraintTop_toBottomOf="@+id/divider15"
+        tools:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/click_payme_price"
@@ -266,7 +267,7 @@
                 app:srcCompat="@drawable/coins" />
 
             <TextView
-                android:id="@+id/tvFinalSum1"
+                android:id="@+id/tvPaymeFinalSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -429,8 +430,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView77" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcLitroResult"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -526,12 +528,13 @@
                     app:srcCompat="@drawable/present" />
 
                 <TextView
-                    android:id="@+id/textView82"
+                    android:id="@+id/tvContractInfoDiscount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="0"
                     android:textColor="@color/bottom_red"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView81"
                     app:layout_constraintStart_toEndOf="@+id/textView81"
                     app:layout_constraintTop_toTopOf="@+id/textView81" />
@@ -543,17 +546,18 @@
                     android:text="%"
                     android:textColor="@color/bottom_red"
                     app:layout_constraintBottom_toBottomOf="@+id/textView81"
-                    app:layout_constraintStart_toEndOf="@+id/textView82"
+                    app:layout_constraintStart_toEndOf="@+id/tvContractInfoDiscount"
                     app:layout_constraintTop_toTopOf="@+id/textView81" />
 
                 <TextView
-                    android:id="@+id/textView84"
+                    android:id="@+id/tvContractInfoDiscountPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="0"
                     android:textColor="@color/bottom_red"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -782,12 +786,11 @@
                 app:strokeWidth="1dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ClientDataLayout"
+                android:id="@+id/clientDataButtonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btClientDataBack"

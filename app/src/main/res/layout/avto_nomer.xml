@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTechNomerCom"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tvInfoTechCom"
@@ -54,8 +54,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edTechNomerCom"
-        tools:visibility="visible">
+        app:layout_constraintTop_toBottomOf="@+id/edTechNomerCom">
 
         <TextView
             android:id="@+id/textView36"

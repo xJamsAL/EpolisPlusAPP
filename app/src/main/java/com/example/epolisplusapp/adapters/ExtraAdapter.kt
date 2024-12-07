@@ -15,7 +15,6 @@ import com.example.epolisplusapp.util.CommonUtils
 import java.util.Locale
 
 class ExtraAdapter(private var riskItem: List<EmergencyServiceRisk>,
-                   private val currencyResId: Int,
                    private val context: Context) :
     RecyclerView.Adapter<ExtraAdapter.ExtraViewHolder>() {
     inner class ExtraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,7 +23,7 @@ class ExtraAdapter(private var riskItem: List<EmergencyServiceRisk>,
         val price: TextView = itemView.findViewById(R.id.tvExtraSubtitle)
         fun bind(extra: EmergencyServiceRisk) {
             val formated =CommonUtils.formatSumWithSeparatorAndCurrency(
-                extra.price, Locale.getDefault(), context, currencyResId
+                extra.price, context
             )
             price.text = formated
             name.text = extra.name

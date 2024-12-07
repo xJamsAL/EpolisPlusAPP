@@ -17,7 +17,7 @@ import com.example.epolisplusapp.util.CommonUtils
 import com.example.epolisplusapp.util.EditHideKeyboard
 import com.example.epolisplusapp.util.EditSpaces
 
-class AddAvtoFrag : Fragment() {
+class AddAvtoFragment : Fragment() {
 
     private lateinit var addAvtoViewModel: AddAvtoViewModel
     private lateinit var dopFormsDialogViewModel: DopFormsDialogViewModel
@@ -40,7 +40,7 @@ class AddAvtoFrag : Fragment() {
         carNomer.addTextChangedListener(EditSpaces(carNomer))
         binding.edTechNomerCom.addTextChangedListener(EditHideKeyboard(binding.edTechNomerCom))
         dopFormsDialogViewModel = DopFormsDialogViewModel.create(requireContext())
-        addAvtoViewModel = AddAvtoViewModel.create(requireContext(), dopFormsDialogViewModel)
+        addAvtoViewModel = AddAvtoViewModel.create(requireContext())
         setupEditTexts()
         setupObservers()
         binding.apply {
@@ -49,8 +49,8 @@ class AddAvtoFrag : Fragment() {
                 val techNomer = edTechNomerCom.text.toString().trim()
                 val avtoRegion = edRegion.text.toString().trim()
                 val avtoNomer = edAvtoNomer.text.toString().trim()
-                addAvtoViewModel.sendCarData(techSeriya, techNomer, avtoRegion, avtoNomer)
-                loadLayoutCom.visibility = View.VISIBLE
+                addAvtoViewModel.callOnClickLoadData(avtoRegion, avtoNomer, techSeriya, techNomer)
+
             }
 
             btSbros.setOnClickListener {
@@ -94,7 +94,23 @@ class AddAvtoFrag : Fragment() {
                     requireContext(),
                     failure.getErrorMessage(requireContext())
                 )
+            val message = failure.getErrorMessage(requireContext())
+            CommonUtils.showCustomToast(requireContext(), message)
         }
+        addAvtoViewModel.navigateBoolean.observe(viewLifecycleOwner) { isSucces ->
+            if (isSucces == true) {
+                binding.apply {
+                    val techSeriya = edTechSeriyaCom.text.toString().trim()
+                    val techNomer = edTechNomerCom.text.toString().trim()
+                    val avtoRegion = edRegion.text.toString().trim()
+                    val avtoNomer = edAvtoNomer.text.toString().trim()
+                    addAvtoViewModel.sendCarData(techSeriya, techNomer, avtoRegion, avtoNomer)
+                    loadLayoutCom.visibility = View.VISIBLE
+                }
+            }
+
+        }
+
 
         addAvtoViewModel.addCarRequestLiveData.observe(viewLifecycleOwner) { carData ->
             if (carData != null) {

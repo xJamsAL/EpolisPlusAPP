@@ -52,6 +52,7 @@ object CommonUtils {
                         ContextCompat.getColorStateList(context, R.color.green)
                 }
             }
+
             ButtonStyle.DISABLED -> {
                 button.apply {
                     compoundDrawableTintList =
@@ -80,6 +81,7 @@ object CommonUtils {
         toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 10000)
         toast.show()
     }
+
     fun setupToolbar(toolbar: Toolbar, activity: AppCompatActivity) {
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.setDisplayShowTitleEnabled(true)
@@ -197,6 +199,7 @@ object CommonUtils {
             }
         }
     }
+
     fun setupEditTextsDialog(
         fragment: BottomSheetDialogFragment,
         containerId: Int,
@@ -211,12 +214,14 @@ object CommonUtils {
             val firstEmptyEditText = editTexts.find { it.text.isEmpty() }
             if (firstEmptyEditText != null) {
                 firstEmptyEditText.requestFocus()
-                val imm = fragment.requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm = fragment.requireContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(firstEmptyEditText, InputMethodManager.SHOW_IMPLICIT)
             } else {
                 val lastEditText = editTexts.last()
                 lastEditText.requestFocus()
-                val imm = fragment.requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm = fragment.requireContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(lastEditText, InputMethodManager.SHOW_IMPLICIT)
             }
         }
@@ -226,7 +231,13 @@ object CommonUtils {
             val limit = limits.getOrNull(i) ?: 2
 
             editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if (s != null) {
@@ -267,6 +278,7 @@ object CommonUtils {
             }
         }
     }
+
     fun setupEditTextsFrag(
         fragment: Fragment,
         containerId: Int,
@@ -281,12 +293,14 @@ object CommonUtils {
             val firstEmptyEditText = editTexts.find { it.text.isEmpty() }
             if (firstEmptyEditText != null) {
                 firstEmptyEditText.requestFocus()
-                val imm = fragment.requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm = fragment.requireContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(firstEmptyEditText, InputMethodManager.SHOW_IMPLICIT)
             } else {
                 val lastEditText = editTexts.last()
                 lastEditText.requestFocus()
-                val imm = fragment.requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm = fragment.requireContext()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(lastEditText, InputMethodManager.SHOW_IMPLICIT)
             }
         }
@@ -296,7 +310,13 @@ object CommonUtils {
             val limit = limits.getOrNull(i) ?: 2
 
             editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if (s != null) {
@@ -354,12 +374,14 @@ object CommonUtils {
             .setBlurRadius(radius)
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     fun setupBlurViewForFragment(fragment: Fragment, blurView: BlurView) {
         val radius = 5f
         val context = fragment.requireContext()
         val rootView = fragment.requireView()
-        val windowBackground: Drawable? = (fragment.requireActivity() as? AppCompatActivity)?.window?.decorView?.background
+        val windowBackground: Drawable? =
+            (fragment.requireActivity() as? AppCompatActivity)?.window?.decorView?.background
 
         blurView.apply {
             setupWith(rootView as ViewGroup, RenderScriptBlur(context))
@@ -374,19 +396,26 @@ object CommonUtils {
 
 
     }
+
     fun hideKeyboard(fragment: Fragment) {
-        val inputMethodManager = fragment.requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = fragment.requireContext()
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val currentFocusView = fragment.view?.rootView ?: return
-        inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        inputMethodManager.hideSoftInputFromWindow(
+            currentFocusView.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 
-    fun hidekeyboardDialog(dialog: BottomSheetDialogFragment?){
-        val inputMethodManager = dialog?.requireContext()?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    fun hidekeyboardDialog(dialog: BottomSheetDialogFragment?) {
+        val inputMethodManager = dialog?.requireContext()
+            ?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val currentFocusView = dialog?.view?.rootView ?: return
-        inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        inputMethodManager.hideSoftInputFromWindow(
+            currentFocusView.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
-
-
 
 
     fun setupBottomSheetBehavior(view: View, dialog: BottomSheetDialogFragment?) {
@@ -408,20 +437,39 @@ object CommonUtils {
         toolbar.setOnClickListener { fragment.dismiss() }
 
     }
+
     fun setupToolbarFrag(toolbar: MaterialToolbar, fragment: Fragment) {
         toolbar.setNavigationOnClickListener {
             fragment.requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         toolbar.setOnClickListener { fragment.requireActivity().onBackPressedDispatcher.onBackPressed() }
     }
+
     fun reloadFragment(fragmentManager: FragmentManager, fragment: Fragment) {
         fragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView, fragment)
             .commit()
     }
 
+    fun formatAndSetTexts(
+        context: Context,
+        pairs: List<Pair<TextView, Int>>,
+    ) {
 
-    fun formatSumWithSeparatorAndCurrency(total: Int, locale: Locale, context: Context, currencyResId: Int): String {
+        pairs.forEach{(textView, value) ->
+            textView.text = formatSumWithSeparatorAndCurrency(
+                value,
+                context
+            )
+        }
+    }
+
+    fun formatSumWithSeparatorAndCurrency(
+        total: Int,
+        context: Context,
+        currencyResId: Int = R.string.dop_uslugi_currency
+    ): String {
+        val locale = Locale("ru", "Ru")
         val formatter = NumberFormat.getInstance(locale)
         formatter.isGroupingUsed = true
         val formattedSum = formatter.format(total)
@@ -429,8 +477,9 @@ object CommonUtils {
         return "$formattedSum $currency"
     }
 
-    fun EditText.addDateMask(){
-        this.addTextChangedListener(object : TextWatcher{
+
+    fun EditText.addDateMask() {
+        this.addTextChangedListener(object : TextWatcher {
             private var isUpdating = false
             private val dateFormat = "dd.mm.yyyy"
             private val divider = "."
@@ -444,14 +493,14 @@ object CommonUtils {
             }
 
             override fun afterTextChanged(s: Editable?) {
-               if (isUpdating) return
+                if (isUpdating) return
                 isUpdating = true
-                val input = s.toString().replace(divider.toString(),"")
+                val input = s.toString().replace(divider.toString(), "")
                 val formatted = StringBuilder()
 
-                for (i in input.indices){
+                for (i in input.indices) {
                     formatted.append(input[i])
-                    if (( i == 1 || i == 3)&& i != input.length - 1 ){
+                    if ((i == 1 || i == 3) && i != input.length - 1) {
                         formatted.append(divider)
                     }
                 }

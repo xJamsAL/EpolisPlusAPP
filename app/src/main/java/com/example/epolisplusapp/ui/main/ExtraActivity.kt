@@ -41,7 +41,7 @@ class ExtraActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         CommonUtils.setupToolbar(binding.extraToolbar, this)
         binding.rcExtraService.layoutManager = LinearLayoutManager(this)
-        extraAdapter = ExtraAdapter(riskItem, R.string.dop_uslugi_currency, this)
+        extraAdapter = ExtraAdapter(riskItem,this)
         binding.rcExtraService.adapter = extraAdapter
         apiService = RetrofitInstance(this).api
 

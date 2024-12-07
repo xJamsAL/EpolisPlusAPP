@@ -3,6 +3,7 @@ package com.example.epolisplusapp.module.module_add_avto
 import android.content.Context
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -30,25 +31,27 @@ import retrofit2.HttpException
 class AddAvtoViewModel(
     private val apiService: MainApi.ApiService,
     private val preferenceService: PreferenceService,
-    private val sharedViewModel: DopFormsSharedViewModel,
-    private val listener: ICarDataListener
+    private val sharedViewModel: DopFormsSharedViewModel
 
 ) : ViewModel() {
 
-    companion object {
-        fun create(context: Context, listener: ICarDataListener): AddAvtoViewModel {
-            val preferenceService = PreferenceService.getInstance(context)
-            val apiService = RetrofitInstance(context).api
-            val sharedViewModel =
-                ViewModelProvider(context as FragmentActivity)[DopFormsSharedViewModel::class.java]
-            return AddAvtoViewModel(apiService, preferenceService, sharedViewModel, listener)
-        }
-    }
-
+    private val _navigateBoolen = MutableLiveData<Boolean>()
+    val navigateBoolean: LiveData<Boolean> get() = _navigateBoolen
     val addCarRequestLiveData = MutableLiveData<AddCarRequest>()
-
     val errorMessageLiveData = MutableLiveData<Failure>()
     private val carDataLiveData = MutableLiveData<BaseApiResponse<AddUserCarResponse>?>()
+
+    fun callOnClickLoadData(inputRegion: String, inputNomer: String, inputTechSeriya:String, inputTechNomer:String ){
+        if(inputNomer.isEmpty() && inputRegion.isEmpty() && inputTechNomer.isEmpty() && inputTechSeriya.isEmpty() ){
+            errorMessageLiveData.value = InputEditTextFailure()
+            _navigateBoolen.value == false
+        }
+        if(inputNomer.isNotEmpty() && inputRegion.isNotEmpty() && inputTechNomer.isNotEmpty() && inputTechSeriya.isNotEmpty() ) {
+            _navigateBoolen.value == true
+        }
+
+
+        }
 
     fun sendCarData(techSeriya: String, techNomer: String, avtoRegion: String, avtoNomer: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -94,7 +97,7 @@ class AddAvtoViewModel(
                             VEHICLE_TYPE_ID = carData.VEHICLE_TYPE_ID
                         )
                         addCarRequestLiveData.value = addCarRequest
-                        listener.onCarDataReceived(addCarRequest)
+
                         sharedViewModel.setAddAvtoData(addCarRequest)
                         Log.d("1234", "pass data: $addCarRequest")
 
@@ -129,6 +132,15 @@ class AddAvtoViewModel(
             errorMessageLiveData.value = GenericFailure()
         }
 
+    }
+    companion object {
+        fun create(context: Context): AddAvtoViewModel {
+            val preferenceService = PreferenceService.getInstance(context)
+            val apiService = RetrofitInstance(context).api
+            val sharedViewModel =
+                ViewModelProvider(context as FragmentActivity)[DopFormsSharedViewModel::class.java]
+            return AddAvtoViewModel(apiService, preferenceService, sharedViewModel)
+        }
     }
 
 

@@ -183,5 +183,6 @@
     <string name="netwotk_fail">Ошибка сети</string>
     <string name="invalid_token">Токен недействителен</string>
     <string name="unknow_error">Неизвестная ошибка</string>
+    <string name="no_items_error">Выберите элемент перед продолжением</string>
 </resources>
 
